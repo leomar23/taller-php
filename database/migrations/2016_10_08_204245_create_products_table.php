@@ -17,25 +17,15 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->integer('brand_id')->unsigned();
-            $table->integer('supplier_id')->unsigned();
             $table->integer('status_product_id')->unsigned();
-            $table->integer('coin_id')->unsigned();
-            $table->integer('type_product_id');
+//            $table->integer('coin_id')->unsigned();
             $table->string('name')->unique();
             $table->string('url')->unique();
-            $table->string('title');
-            //Talle
-            //Color
-            $table->text('description_short');
-            $table->text('description');
-            $table->text('address')->nullable();
-            $table->text('cover_route');
-            $table->text('video_route')->nullable();
-            $table->text('tags')->nullable();
-            $table->text('coord')->nullable();
+            $table->text('description')->nullable();
+            $table->text('bar_code');
+            $table->integer('stock');
+            $table->text('image')->nullable();
             $table->float('price',14,5);
-            $table->float('value_now',14,5);
             $table->boolean('active')->nullable()->default(false);
             $table->timestamps();
 
@@ -43,12 +33,8 @@ class CreateProductsTable extends Migration
                 ->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')
                 ->on('categories')->onDelete('cascade');
-            $table->foreign('brand_id')->references('id')
-                ->on('brands')->onDelete('cascade');
-            $table->foreign('supplier_id')->references('id')
-                ->on('suppliers')->onDelete('cascade');
-            $table->foreign('coin_id')->references('id')
-                ->on('coins')->onDelete('cascade');
+//            $table->foreign('coin_id')->references('id')
+//                ->on('coins')->onDelete('cascade');
             $table->foreign('type_product_id')->references('id')
                 ->on('type_products')->onDelete('cascade');
             $table->foreign('status_product_id')->references('id')
