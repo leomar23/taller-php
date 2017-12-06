@@ -5,14 +5,14 @@
             <div class="box">
                 <div class="box-body">
                     <div class="jumbotron" style="background-color:transparent;">
-                        <h1>Bienvenido!</h1>
+                        <h1>¡Bienvenido!</h1>
                         <br>
                         <h2>Taller PHP 2017 - Grupo --</h2>
                         <h3>Integrantes</h3>
                         <ol>
+                            <li>Ángela Cayetano</li>
+                            <li>Ignacio Hernández</li>
                             <li>Leonardo Olivera</li>
-                            <li>----</li>
-                            <li>----</li>
                         </ol>
                     </div>
                 </div>
