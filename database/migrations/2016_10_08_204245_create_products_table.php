@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
+            $table->integer('type_product_id')->unsigned();
             $table->integer('status_product_id')->unsigned();
-//            $table->integer('coin_id')->unsigned();
             $table->string('name')->unique();
             $table->string('url')->unique();
             $table->text('description')->nullable();
@@ -30,15 +30,13 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
-                ->on('users')->onDelete('cascade');
+                ->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('category_id')->references('id')
-                ->on('categories')->onDelete('cascade');
-//            $table->foreign('coin_id')->references('id')
-//                ->on('coins')->onDelete('cascade');
+                ->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('type_product_id')->references('id')
-                ->on('type_products')->onDelete('cascade');
+                ->on('type_products')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('status_product_id')->references('id')
-                ->on('status_products')->onDelete('cascade');
+                ->on('status_products')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
