@@ -298,10 +298,11 @@
         </nav>
     </header>
 
-    <!-- lEFT MENU -->
+    <!-- LEFT MENU -->
     <aside class="main-sidebar">
 
         <section class="sidebar">
+          
             <!-- USER PANEL -->
             <div class="user-panel">
                 {{--<div class="pull-left image">--}}
@@ -319,6 +320,7 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
+
             {{-- <!-- SEARCH FORM -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
