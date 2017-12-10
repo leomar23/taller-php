@@ -165,7 +165,95 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'status-delete',
                 'display_name' => 'Delete status',
                 'description' => 'Delete status'
-            ]
+            ],
+            [
+                //BUSINESSES
+                'name' => 'businesses-list',
+                'display_name' => 'Display businesses Listing',
+                'description' => 'See only Listing Of Businesses'
+            ],
+            [
+                'name' => 'businesses-create',
+                'display_name' => 'Create Businesses',
+                'description' => 'Create New Businesses'
+            ],
+            [
+                'name' => 'businesses-edit',
+                'display_name' => 'Edit Businesses',
+                'description' => 'Edit Businesses'
+            ],
+            [
+                'name' => 'businesses-delete',
+                'display_name' => 'Delete Businesses',
+                'description' => 'Delete Businesses'
+            ],
+            [
+                //PRODUCTS
+                'name' => 'products-list',
+                'display_name' => 'Display products Listing',
+                'description' => 'See only Listing Of Products'
+            ],
+            [
+                'name' => 'products-create',
+                'display_name' => 'Create Products',
+                'description' => 'Create New Products'
+            ],
+            [
+                'name' => 'products-edit',
+                'display_name' => 'Edit Products',
+                'description' => 'Edit Products'
+            ],
+            [
+                'name' => 'products-delete',
+                'display_name' => 'Delete Products',
+                'description' => 'Delete Products'
+            ],
+            [
+            //ORDERS
+                'name' => 'orders-list',
+                'display_name' => 'Display orders Listing',
+                'description' => 'See only Listing Of Orders'
+            ],
+            [
+                'name' => 'orders-create',
+                'display_name' => 'Create Orders',
+                'description' => 'Create New Orders'
+            ],
+            [
+                'name' => 'orders-edit',
+                'display_name' => 'Edit Orders',
+                'description' => 'Edit Orders'
+            ],
+            [
+                'name' => 'orders-delete',
+                'display_name' => 'Delete Orders',
+                'description' => 'Delete Orders'
+            ],
+            [
+            //ORDERS_STATUSES
+                'name' => 'orders_statuses-list',
+                'display_name' => 'Display orders_statuses Listing',
+                'description' => 'See only Listing Of Orders Statuses'
+            ],
+            [
+                'name' => 'orders_statuses-create',
+                'display_name' => 'Create Orders Statuses',
+                'description' => 'Create New Statuses for Orders'
+            ],
+            [
+                'name' => 'orders_statuses-edit',
+                'display_name' => 'Edit Orders Satuses',
+                'description' => 'Edit Orders Statuses'
+            ],
+            [
+                'name' => 'orders_statuses-delete',
+                'display_name' => 'Delete Orders Statuses',
+                'description' => 'Delete Orders Statuses'
+            ],
+
+
+
+
 
         ];
 
