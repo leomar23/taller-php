@@ -23,8 +23,45 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 Route::group(['middleware' => ['auth']], function() {
     Route::get('admin',['as'=>'admin.index','uses'=>'AdminController@index','middleware' => ['permission:admin-index']]);
 
-    //Route::resource('users','UserController');
+    Route::resource('users','UserController');
 
+    Route::get('admin',['as'=>'admin.index','uses'=>'AdminController@index','middleware' => ['permission:admin-index']]);
+    Route::get('admin/admin',['as'=>'admin.admin','uses'=>'AdminController@admin','middleware' => ['permission:admin-index']]);
+    Route::get('admin/theme',['as'=>'admin.theme','uses'=>'AdminController@theme','middleware' => ['permission:admin-index']]);
+    Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);
+    Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create','middleware' => ['permission:role-create']]);
+    Route::post('roles/create',['as'=>'roles.store','uses'=>'RoleController@store','middleware' => ['permission:role-create']]);
+    Route::get('roles/{id}',['as'=>'roles.show','uses'=>'RoleController@show']);
+    Route::get('roles/{id}/edit',['as'=>'roles.edit','uses'=>'RoleController@edit','middleware' => ['permission:role-edit']]);
+    Route::patch('roles/{id}',['as'=>'roles.update','uses'=>'RoleController@update','middleware' => ['permission:role-edit']]);
+    Route::delete('roles/{id}',['as'=>'roles.destroy','uses'=>'RoleController@destroy','middleware' => ['permission:role-delete']]);
+    
+    Route::get('coin/index',['as'=>'coin.index','uses'=>'CoinController@index']);//,'middleware' => ['permission:coin-list']]);
+    Route::get('coin/create',['as'=>'coin.create','uses'=>'CoinController@create']);//,'middleware' => ['permission:coin-create']]);
+    Route::post('coin/create',['as'=>'coin.store','uses'=>'CoinController@store']);//,'middleware' => ['permission:coin-create']]);
+
+    //CATEGORY
+    Route::resource('category','CategoryController');
+
+    //TYPE PRODUCT
+    Route::resource('typeProduct','TypeProductController');
+
+    //STATUS PRODUCT
+    Route::resource('statusProduct','StatusProductController');
+
+    //SLDER
+    Route::resource('slider','SliderController');
+    //Route::get('slider/image',['as'=>'slider.image','uses'=>'SliderController@image']);
+    
+    //PROYECT
+    Route::get('product/admin',['as'=>'product.admin','uses'=>'ProductController@admin']);
+    Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create']);
+    Route::post('product/create',['as'=>'product.store','uses'=>'ProductController@store']);
+    Route::get('product/{id}',['as'=>'product.show','uses'=>'ProductController@show']);
+    Route::get('product/{id}/edit',['as'=>'product.edit','uses'=>'ProductController@edit']);
+    Route::patch('product/{id}',['as'=>'product.update','uses'=>'ProductController@update']);
+    Route::delete('product/{id}',['as'=>'product.destroy','uses'=>'ProductController@destroy','middleware' => ['permission:project-delete']]);
+    
     //USER
     Route::get('users',['as'=>'users.index','uses'=>'UserController@index','middleware' => ['permission:user-list|user-create|user-edit|user-delete']]);
     Route::get('users/create',['as'=>'users.create','uses'=>'UserController@create','middleware' => ['permission:user-create']]);
@@ -42,7 +79,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('roles/{id}/edit',['as'=>'roles.edit','uses'=>'RoleController@edit','middleware' => ['permission:role-edit']]);
     Route::patch('roles/{id}',['as'=>'roles.update','uses'=>'RoleController@update','middleware' => ['permission:role-edit']]);
     Route::delete('roles/{id}',['as'=>'roles.destroy','uses'=>'RoleController@destroy','middleware' => ['permission:role-delete']]);
-
+        
     //PERMISSION
     Route::get('permission',['as'=>'permission.index','uses'=>'PermissionController@index']);//,'middleware' => ['permission:permission-list|permission-create|permission-edit|permission-delete']]);
     Route::get('permission/create',['as'=>'permission.create','uses'=>'PermissionController@create']);//,'middleware' => ['permission:permission-create']]);

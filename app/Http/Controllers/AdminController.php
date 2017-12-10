@@ -13,7 +13,7 @@ class AdminController extends Controller
        return view('admin.index');
     }
 
-    /*public function admin()
+    public function admin()
     {
         return view('admin.admin');
     }
@@ -21,6 +21,6 @@ class AdminController extends Controller
     public function theme()
     {
         return view('admin.theme');
-    }*/
+    }
 
 }

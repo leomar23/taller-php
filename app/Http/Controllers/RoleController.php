@@ -108,7 +108,6 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:roles,name,'.$id,
             'display_name' => 'required',
             'description' => 'required',
             'permission' => 'required',
@@ -125,12 +124,9 @@ class RoleController extends Controller
         foreach ($request->input('permission') as $key => $value) {
             $role->attachPermission($value);
         }
-        $notification = array(
-            'message' => Lang::get('messages.update_role'),
-            'alert-type' => 'success'
-        );
+
         return redirect()->route('roles.index')
-            ->with($notification);
+            ->with('success','Role updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -141,11 +137,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        $notification = array(
-            'message' => Lang::get('messages.delete_role'),
-            'alert-type' => 'success'
-        );
         return redirect()->route('roles.index')
-            ->with($notification);
+            ->with('success','Role deleted successfully');
     }
 }

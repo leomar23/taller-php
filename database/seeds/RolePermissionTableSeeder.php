@@ -20,26 +20,26 @@ class RolePermissionTableSeeder extends Seeder
             $role->attachPermission($value);
         }
 
-        $permission2 = Permission::query()->whereIn('id', [1, 2, 3, 4])->get(); //whereIn('id', [1, 2, 3]
+        $permission2 = Permission::all();
         $role2 = Role::query()->where('name', 'gerente')->first();
 
         foreach ($permission2 as $key => $value2) {
             $role2->attachPermission($value2);
         }
 
-        /*$permission3 = Permission::all();
+        $permission3 = Permission::query()->whereIn('id', [10, 14, 22])->get();
         $role3 = Role::query()->where('name', 'despachador')->first();
 
         foreach ($permission3 as $key => $value3) {
             $role3->attachPermission($value3);
         }
 
-        $permission4 = Permission::all();
+        $permission4 = Permission::query()->whereIn('id', [14])->get();
         $role4 = Role::query()->where('name', 'cliente')->first();
 
         foreach ($permission4 as $key => $value4) {
             $role4->attachPermission($value4);
-        }*/
+        }
 
     }
 }

@@ -57,13 +57,8 @@ class UserController extends Controller
             $user->attachRole($value);
         }
 
-        $notification = array(
-            'message' => Lang::get('messages.create_user'),
-            'alert-type' => 'success'
-        );
-
         return redirect()->route('users.index')
-            ->with($notification);
+            ->with('success','User created successfully');
     }
 
     /**
@@ -125,13 +120,8 @@ class UserController extends Controller
             $user->attachRole($value);
         }
 
-        $notification = array(
-            'message' => Lang::get('messages.edit_user'),
-            'alert-type' => 'success'
-        );
-
         return redirect()->route('users.index')
-            ->with($notification);
+            ->with('success','User updated successfully');
     }
 
     /**
@@ -143,11 +133,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        $notification = array(
-            'message' => Lang::get('messages.delete_user'),
-            'alert-type' => 'success'
-        );
         return redirect()->route('users.index')
-            ->with($notification);
+            ->with('success','User deleted successfully');
     }
 }

@@ -182,6 +182,7 @@ return [
         // Taller\Providers\BroadcastServiceProvider::class,
         Taller\Providers\EventServiceProvider::class,
         Taller\Providers\RouteServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
     ],
 
