@@ -7,6 +7,7 @@ use Taller\Http\Requests;
 use Taller\Role;
 use Taller\Permission;
 use DB;
+use Lang;
 
 class RoleController extends Controller
 {
@@ -58,10 +59,12 @@ class RoleController extends Controller
             $role->attachPermission($value);
         }
 
+        
         $notification = array(
             'message' => Lang::get('messages.create_role'),
             'alert-type' => 'success'
         );
+        
 
         return redirect()->route('roles.index')
             ->with($notification);
