@@ -16,8 +16,12 @@ class CreateBusinessesTable extends Migration
         Schema::create('businesses', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('owner_id')->unsigned();
             $table->text('location')->nulleable();
             $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')
+                ->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

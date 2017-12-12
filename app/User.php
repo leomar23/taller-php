@@ -17,7 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','last_name','phone','birth_date','gender','status_id'
+        'name', 
+        'last_name',
+        'phone',
+        'birth_date',
+        'gender',
+        'email',         
+        'password',
+        'status_id'
     ];
 
     /**
@@ -26,11 +33,27 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
     ];
 
     public function UserStatus()
     {
         return $this->belongsTo(UserStatus::class);
+    }
+
+    public function Role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function Order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function Business()
+    {
+        return $this->belongsTo(Business::class);
     }
 }

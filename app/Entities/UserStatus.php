@@ -10,8 +10,14 @@ class UserStatus extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [
+    protected $fillable = 
+    [
+    	'name'
+    ];
 
-    	];
+    public function User()
+    {
+        return $this->hasMany(User::class);
+    }
 
 }
