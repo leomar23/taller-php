@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
     //CATEGORY
     //Route::resource('category','CategoryController');
     
-    //PROYECT
+    //PRODUCT
     Route::get('product/admin',['as'=>'product.admin','uses'=>'ProductController@admin']);
     Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create']);
     Route::post('product/create',['as'=>'product.store','uses'=>'ProductController@store']);
@@ -76,13 +76,21 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('permission/{id}',['as'=>'permission.update','uses'=>'PermissionController@update']);//,'middleware' => ['permission:permission-edit']]);
     Route::delete('permission/{id}',['as'=>'permission.destroy','uses'=>'PermissionController@destroy']);//,'middleware' => ['permission:permission-delete']]);
 
-    //Category
+    //CATEGORY
     Route::get('category',['as'=>'category.index','uses'=>'CategoryController@index']);//,'middleware' => ['permission:category-list|category-create|category-edit|category-delete']]);
     Route::get('category/create',['as'=>'category.create','uses'=>'CategoryController@create']);//,'middleware' => ['permission:category-create']]);
     Route::post('category/create',['as'=>'category.store','uses'=>'CategoryController@store']);//,'middleware' => ['permission:category-create']]);
     Route::get('category/{id}/edit',['as'=>'category.edit','uses'=>'CategoryController@edit']);//,'middleware' => ['permission:category-edit']]);
     Route::patch('category/{id}',['as'=>'category.update','uses'=>'CategoryController@update']);//,'middleware' => ['permission:category-edit']]);
     Route::delete('category/{id}',['as'=>'category.destroy','uses'=>'CategoryController@destroy']);//,'middleware' => ['permission:category-delete']]);
+
+    //BUSINESS
+    Route::get('business',['as'=>'business.index','uses'=>'BusinessesController@index']);//,'middleware' => ['permission:business-list|business-create|business-edit|business-delete']]);
+    Route::get('business/create',['as'=>'business.create','uses'=>'BusinessesController@create']);//,'middleware' => ['permission:business-create']]);
+    Route::post('business/create',['as'=>'business.store','uses'=>'BusinessesController@store']);//,'middleware' => ['permission:business-create']]);
+    Route::get('business/{id}/edit',['as'=>'business.edit','uses'=>'BusinessesController@edit']);//,'middleware' => ['permission:business-edit']]);
+    Route::patch('business/{id}',['as'=>'business.update','uses'=>'BusinessesController@update']);//,'middleware' => ['permission:business-edit']]);
+    Route::delete('business/{id}',['as'=>'business.destroy','uses'=>'BusinessesController@destroy']);//,'middleware' => ['permission:business-delete']]);
 
     /*Route::get('product',['as'=>'product.index','uses'=>'ProductController@admin']);//,'middleware' => ['permission:project-list|product-create|product-edit|product-delete']]);
     Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create']);//,'middleware' => ['permission:project-create']]);
