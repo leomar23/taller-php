@@ -30,6 +30,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\Taller\Repositories\TypeProductRepository::class, \Taller\Repositories\TypeProductRepositoryEloquent::class);
         $this->app->bind(\Taller\Repositories\StatusProductRepository::class, \Taller\Repositories\StatusProductRepositoryEloquent::class);
         $this->app->bind(\Taller\Repositories\ConfigurationRepository::class, \Taller\Repositories\ConfigurationRepositoryEloquent::class);
+        $this->app->bind(\Taller\Repositories\OrderRepository::class, \Taller\Repositories\OrderRepositoryEloquent::class);
 
     }
 }

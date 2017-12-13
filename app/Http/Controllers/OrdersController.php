@@ -38,18 +38,9 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()    
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $orders = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $orders,
-            ]);
-        }
-
+        $orders = $this->repository->paginate(5);
         return view('orders.index', compact('orders'));
     }
 
@@ -60,36 +51,29 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function create()
+    {
+        return view('orders.create');
+    }
+
+
     public function store(OrderCreateRequest $request)
     {
 
-        try {
+        $this->validate($request, [
+            'name' => 'required|unique:orders,name',
+        ]);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+        $this->repository->create($request->toArray());
+        
+        $notification = array(
+            'message' => Lang::get('messages.create_role'),
+            'alert-type' => 'success'
+        );
 
-            $order = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Order created.',
-                'data'    => $order->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->route('orders.index')
+            ->with($notification);
     }
 
 
@@ -142,35 +126,19 @@ class OrdersController extends Controller
     public function update(OrderUpdateRequest $request, $id)
     {
 
-        try {
+       $this->validate($request, [
+            'name' => 'required|unique:orders,name'.$id,
+        ]);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+        $orders = $this->repository->update($id, $request->all());
 
-            $order = $this->repository->update($id, $request->all());
+        $notification = array(
+            'message' => Lang::get('messages.edit_role'),
+            'alert-type' => 'success'
+        );
 
-            $response = [
-                'message' => 'Order updated.',
-                'data'    => $order->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->route('orders.index')
+            ->with($notification);
     }
 
 

@@ -101,6 +101,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('roles/{id}',['as'=>'roles.update','uses'=>'RoleController@update','middleware' => ['permission:role-edit']]);
     Route::delete('roles/{id}',['as'=>'roles.destroy','uses'=>'RoleController@destroy','middleware' => ['permission:role-delete']]);
 
+    //ORDERS
+    Route::get('orders',['as'=>'orders.index','uses'=>'OrdersController@index']);//,'middleware' => ['permission:orders-list|orders-create|orders-edit|orders-delete']]);
+    Route::get('orders/create',['as'=>'orders.create','uses'=>'OrdersController@create']);//,'middleware' => ['permission:orders-create']]);
+    Route::post('orders/create',['as'=>'orders.store','uses'=>'OrdersController@store']);//,'middleware' => ['permission:orders-create']]);
+    Route::get('orders/{id}/edit',['as'=>'orders.edit','uses'=>'OrdersController@edit']);//,'middleware' => ['permission:orders-edit']]);
+    Route::patch('orders/{id}',['as'=>'orders.update','uses'=>'OrdersController@update']);//,'middleware' => ['permission:orders-edit']]);
+    Route::delete('orders/{id}',['as'=>'orders.destroy','uses'=>'OrdersController@destroy']);//,'middleware' => ['permission:orders-delete']]);
+
+
     /*Route::get('product',['as'=>'product.index','uses'=>'ProductController@admin']);//,'middleware' => ['permission:project-list|product-create|product-edit|product-delete']]);
     Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create']);//,'middleware' => ['permission:project-create']]);
     Route::post('product/create',['as'=>'product.store','uses'=>'ProductController@store']);//,'middleware' => ['permission:project-create']]);
