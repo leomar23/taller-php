@@ -93,7 +93,6 @@ class PermissionController extends BaseController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:permissions,name'.$id,
             'display_name' => 'required',
             'description' => 'required'
         ]);
@@ -104,7 +103,7 @@ class PermissionController extends BaseController
         $permission->save();
 
         $notification = array(
-            'message' => Lang::get('messages.update_permission'),
+            'message' => Lang::get('messages.edit_permission'),
             'alert-type' => 'success'
         );
 

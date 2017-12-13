@@ -17,8 +17,6 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name',70)->unique();
             $table->text('description')->nullable();
-            $table->string('ruta_img',255)->nulleable();
-            $table->string('icon',100)->nulleable();
             $table->timestamps();
         });
     }

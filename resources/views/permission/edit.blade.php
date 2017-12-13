@@ -15,11 +15,11 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-8">
-                        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                        <!-- <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label>@lang('labels.name')</label>
                             {!! Form::text('name', null, array('placeholder' => Lang::get('labels.name'),'class' => 'form-control border-input')) !!}
                             {!! $errors->first('name', '<span class="help-block text-danger">:message</span>') !!}
-                        </div>
+                        </div> -->
                         <div class="form-group {{ $errors->has('display_name') ? ' has-error' : '' }}">
                             <label>@lang('labels.display_name')</label>
                             {!! Form::text('display_name', null, array('placeholder' => Lang::get('labels.display_name'),'class' => 'form-control border-input')) !!}
@@ -36,10 +36,14 @@
             <div class="box-footer">
                 <div class="text-right">
                     <a class="btn btn-default btn-tl-outline" href="{{ route('permission.index') }}"> @lang('buttons.cancel')</a>
-                    <button type="submit" class="btn btn-success">@lang('buttons.submit')</button>
+                    <button type="submit" class="btn btn-success">@lang('buttons.save')</button>
                 </div>
             </div>
         </div>
         {!! Form::close() !!}
     </section>
+@endsection
+
+@section('scripts-back-page')
+    {!! JsValidator::formRequest('Taller\Http\Requests\PermissionUpdateRequest', '#permission-form') !!}
 @endsection
