@@ -40,3 +40,11 @@
         @endif
             <a href="{{ route('category.index') }}"><i class="fa fa-lock"></i><span>Categorias</span></a></li>
     @endif
+    @if (Entrust::can('category-list'))
+        @if(Route::is('category.index'))
+            <li class="active">
+        @else
+            <li>
+        @endif
+            <a href="{{ route('business.index') }}"><i class="fa fa-lock"></i><span>Comercios</span></a></li>
+    @endif
