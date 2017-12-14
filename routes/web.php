@@ -77,12 +77,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('permission/{id}',['as'=>'permission.destroy','uses'=>'PermissionController@destroy']);//,'middleware' => ['permission:permission-delete']]);
 
     //CATEGORY
-    Route::get('category',['as'=>'category.index','uses'=>'CategoryController@index']);//,'middleware' => ['permission:category-list|category-create|category-edit|category-delete']]);
-    Route::get('category/create',['as'=>'category.create','uses'=>'CategoryController@create']);//,'middleware' => ['permission:category-create']]);
-    Route::post('category/create',['as'=>'category.store','uses'=>'CategoryController@store']);//,'middleware' => ['permission:category-create']]);
-    Route::get('category/{id}/edit',['as'=>'category.edit','uses'=>'CategoryController@edit']);//,'middleware' => ['permission:category-edit']]);
-    Route::patch('category/{id}',['as'=>'category.update','uses'=>'CategoryController@update']);//,'middleware' => ['permission:category-edit']]);
-    Route::delete('category/{id}',['as'=>'category.destroy','uses'=>'CategoryController@destroy']);//,'middleware' => ['permission:category-delete']]);
+    Route::get('category',['as'=>'category.index','uses'=>'CategoryController@index','middleware' => ['permission:category-list|category-create|category-edit|category-delete']]);
+    Route::get('category/create',['as'=>'category.create','uses'=>'CategoryController@create','middleware' => ['permission:category-create']]);
+    Route::post('category/create',['as'=>'category.store','uses'=>'CategoryController@store','middleware' => ['permission:category-create']]);
+    Route::get('category/{id}/edit',['as'=>'category.edit','uses'=>'CategoryController@edit','middleware' => ['permission:category-edit']]);
+    Route::patch('category/{id}',['as'=>'category.update','uses'=>'CategoryController@update','middleware' => ['permission:category-edit']]);
+    Route::delete('category/{id}',['as'=>'category.destroy','uses'=>'CategoryController@destroy','middleware' => ['permission:category-delete']]);
 
     //BUSINESS
     Route::get('business',['as'=>'business.index','uses'=>'BusinessController@index']);//,'middleware' => ['permission:business-list|business-create|business-edit|business-delete']]);

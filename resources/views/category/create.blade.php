@@ -4,7 +4,7 @@
     <section class="content-header animated fadeIn fast">
         <h1>
             Categorias
-            <small>Nuevo</small>
+            <small>Nueva Categoría</small>
         </h1>
         <br>
         <a class="btn btn-default btn-st" href="{{ route('category.index') }}"> @lang('buttons.back')</a>
@@ -15,8 +15,7 @@
         <div class="box">
             <div class="box-body">
                 
-                <div class="row">
-                    
+                <div class="row">                    
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label>@lang('labels.name')</label>

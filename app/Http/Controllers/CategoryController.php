@@ -11,6 +11,7 @@ use Taller\Http\Requests\CategoryCreateRequest;
 use Taller\Http\Requests\CategoryUpdateRequest;
 use Taller\Repositories\CategoryRepository;
 use Taller\Validators\CategoryValidator;
+use Taller\Entities\Category;
 use Lang;
 
 class CategoryController extends Controller
@@ -66,20 +67,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
+        //dd($request);
         $this->validate($request, [
             'name' => 'required|unique:categories,name',
+            'description' => 'required'
         ]);
 
-        $this->repository->create($request->toArray());
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
+        $category->save();
+
+        /*$this->repository->create($request->toArray());*/
+
+        return redirect()->route('category.index')
+            ->with('success','Categoría editada correctamente');
         
-        $notification = array(
+        /*$notification = array(
             'message' => Lang::get('messages.create_category'),
             'alert-type' => 'success'
         );
 
         return redirect()->route('category.index')
-            ->with($notification);
+            ->with($notification);*/
 
         /*try {
 
@@ -126,6 +136,8 @@ class CategoryController extends Controller
 
         $category = $this->repository->find($id);
 
+        /*$category bien armado*/
+
         return view('category.edit', compact('category'));
     }
 
@@ -140,19 +152,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($id, $request);
         $this->validate($request, [
-            'name' => 'required|unique:categories,name'.$id,
+            'name' => 'required|unique:categories,name',
+            'description' => 'required'
         ]);
 
-        $category = $this->repository->update($id, $request->all());
+        //dd($id, $request);
 
-        $notification = array(
-            'message' => Lang::get('messages.edit_category'),
-            'alert-type' => 'success'
-        );
+        //$category = $this->repository->update($id, $request->all());
+
+        $category = Category::find($id);
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
+        $category->save();
 
         return redirect()->route('category.index')
-            ->with($notification);
+            ->with('success','Categoría editada correctamente');
+
+        /*$notification = array(
+            'message' => Lang::get('messages.edit_category'),
+            'alert-type' => 'success'
+        );*/
+
+        /*return redirect()->route('category.index')
+            ->with($notification);*/
 
     
         

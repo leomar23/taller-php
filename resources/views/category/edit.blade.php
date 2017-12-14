@@ -20,14 +20,14 @@
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label>@lang('labels.name')</label>
-                            {!! Form::text('name', null, array('placeholder' => Lang::get('labels.name'),'class' => 'form-control  border-input')) !!}
+                            {!! Form::text('name', null, array('placeholder' => 'name','class' => 'form-control  border-input')) !!}
                             {!! $errors->first('name', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                             <label>@lang('labels.description')</label>
-                            {!! Form::textarea('description', null, array('placeholder' => Lang::get('labels.description'),'class' => 'form-control border-input')) !!}
+                            {!! Form::textarea('description', null, array('placeholder' => 'description', 'class' => 'form-control border-input')) !!}
                             {!! $errors->first('description', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                     </div>

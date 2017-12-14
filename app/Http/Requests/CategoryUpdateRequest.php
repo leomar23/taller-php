@@ -10,10 +10,12 @@ class CategoryUpdateRequest extends FormRequest
 
     public function rules()
     {
-        $id = $this->route()->parameter('category');
+
+    	$id = $this->route()->parameter('id'); //** ATENTO **//
         
         return [
-            'name' => 'required|unique:categories,name'.$id,
+            'name' => 'required|unique:categories,name'.$id, //** FUNCA **//
+            'description' => 'required',
         ];
     }
 }

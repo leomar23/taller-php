@@ -13,7 +13,9 @@ class BusinessUpdateRequest extends FormRequest
         $id = $this->route()->parameter('business');
         
         return [
-            'name' => 'required|unique:businesses,name'.$id,
+            'name' => 'required|unique:businesses,name'.$id,            
+            'owner_id' => 'required',
+            'location' => 'required'
         ];
     }
 

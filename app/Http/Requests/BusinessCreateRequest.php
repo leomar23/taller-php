@@ -13,7 +13,7 @@ class BusinessCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,8 @@ class BusinessCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:businesses,name',
+            'owner_id' => 'required',
+            'location' => 'required'
         ];
     }
 }
