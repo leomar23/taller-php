@@ -80,8 +80,13 @@ class CategoryController extends Controller
 
         /*$this->repository->create($request->toArray());*/
 
+        $notification = array(
+            'message' => 'Categoría creada con éxito',
+            'alert-type' => 'success'
+        );
+
         return redirect()->route('category.index')
-            ->with('success','Categoría editada correctamente');
+            ->with($notification);
         
         /*$notification = array(
             'message' => Lang::get('messages.create_category'),
@@ -154,7 +159,7 @@ class CategoryController extends Controller
     {
         //dd($id, $request);
         $this->validate($request, [
-            'name' => 'required|unique:categories,name',
+            'name' => 'required',
             'description' => 'required'
         ]);
 
@@ -167,8 +172,13 @@ class CategoryController extends Controller
         $category->description = $request->input('description');
         $category->save();
 
+        $notification = array(
+            'message' => 'Categoría editada con éxito',
+            'alert-type' => 'success'
+        );
+
         return redirect()->route('category.index')
-            ->with('success','Categoría editada correctamente');
+            ->with($notification);
 
         /*$notification = array(
             'message' => Lang::get('messages.edit_category'),
@@ -197,11 +207,11 @@ class CategoryController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Category deleted.',
+                'message' => 'Categoría eliminada.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Category deleted.');
+        return redirect()->back()->with('message', 'Categoría eliminada.');
     }
 }

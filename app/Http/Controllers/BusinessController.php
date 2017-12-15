@@ -82,6 +82,7 @@ class BusinessController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:businesses,name',
+            'owner_id' => 'required',            
             'location' => 'required'
         ]);
 
@@ -173,7 +174,7 @@ class BusinessController extends Controller
     public function update(Request $request, $id)
     {
         dd($id, $request);
-        
+
         $this->validate($request, [
             'name' => 'required|unique:businesses,name',
             'owner_id' => 'required',
