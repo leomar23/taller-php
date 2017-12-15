@@ -14,7 +14,8 @@ class CategoryUpdateRequest extends FormRequest
     	$id = $this->route()->parameter('id'); //** ATENTO **//
         
         return [
-            'name' => 'required|unique:categories,name'.$id, //** FUNCA **//
+            //'name' => 'required|unique:categories,name'.$id, //** FUNCA **//
+            'name' => 'required', //** FUNCA **//
             'description' => 'required',
         ];
     }

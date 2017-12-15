@@ -14,7 +14,7 @@ class Product extends Model implements Transformable
     [
         'category_id',
         'status_product_id',
-        'name',  
+        'name',
         'description',
         'bar_code',
         'image',
@@ -26,7 +26,7 @@ class Product extends Model implements Transformable
         return $this->belongsTo(Category::class);
     }
 
-    public function Status()
+    public function StatusProduct()
     {
         return $this->belongsTo(StatusProduct::class);
     }

@@ -62,6 +62,7 @@
      'search' => 'Buscar',
      'subject' => 'Asunto',
      'message' => 'Mensaje',
+     'bar_code' => 'Código de Barra',
 
      //SELECT
      'default_select_gender' => 'Seleccione sexo',
