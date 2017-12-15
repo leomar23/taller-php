@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('admin',['as'=>'admin.index','uses'=>'AdminController@index','middleware' => ['permission:admin-index']]);
 
     Route::resource('users','UserController');
-       s
+    
     //PRODUCT
     Route::get('product',['as'=>'product.index','uses'=>'ProductController@index','middleware' => ['permission:product-list|product-create|product-edit|product-delete']]);
     Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create','middleware' => ['permission:product-create']]);
@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('product/{id}',['as'=>'product.destroy','uses'=>'ProductController@destroy','middleware' => ['permission:product-delete']]);
     
     //USER
+    Route::get('users',['as'=>'users.index','uses'=>'UserController@index','middleware' => ['permission:user-list|user-create|user-edit|user-delete']]);
     Route::get('users/create',['as'=>'users.create','uses'=>'UserController@create','middleware' => ['permission:user-create']]);
     Route::post('users/create',['as'=>'users.store','uses'=>'UserController@store','middleware' => ['permission:user-create']]);
     Route::get('users/{id}',['as'=>'users.show','uses'=>'UserController@show']);
