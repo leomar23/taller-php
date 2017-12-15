@@ -24,8 +24,8 @@ class BusinessCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:businesses,name',
-            'owner_id' => 'required',
+            //'name' => 'required|unique:businesses,name',
+            //'owner_id' => 'required',
             'location' => 'required'
         ];
     }

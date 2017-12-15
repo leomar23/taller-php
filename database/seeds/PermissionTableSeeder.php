@@ -168,22 +168,22 @@ class PermissionTableSeeder extends Seeder
             ],
             [
                 //BUSINESSES
-                'name' => 'businesses-list',
+                'name' => 'business-list',
                 'display_name' => 'Display businesses Listing',
                 'description' => 'See only Listing Of Businesses'
             ],
             [
-                'name' => 'businesses-create',
+                'name' => 'business-create',
                 'display_name' => 'Create Businesses',
                 'description' => 'Create New Businesses'
             ],
             [
-                'name' => 'businesses-edit',
+                'name' => 'business-edit',
                 'display_name' => 'Edit Businesses',
                 'description' => 'Edit Businesses'
             ],
             [
-                'name' => 'businesses-delete',
+                'name' => 'business-delete',
                 'display_name' => 'Delete Businesses',
                 'description' => 'Delete Businesses'
             ],
