@@ -12,43 +12,23 @@ class Product extends Model implements Transformable
 
     protected $fillable = 
     [
-        'user_id',
         'category_id',
-        'type_product_id'
         'status_product_id',
-        'name', 
-        'url', 
+        'name',
         'description',
         'bar_code',
-        'stock',
         'image',
         'price',
-        'active'
     ];
-
-    public function User()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function Category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function Status()
+    public function StatusProduct()
     {
         return $this->belongsTo(StatusProduct::class);
-    }
-
-    public function Media()
-    {
-        return $this->hasMany(Media::class);
-    }
-
-    public function TypeProduct()
-    {
-        return $this->belongsTo(TypeProduct::class);
     }
 
     // LEO

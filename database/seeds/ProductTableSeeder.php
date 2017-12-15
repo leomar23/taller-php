@@ -32,7 +32,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 800,
             ],
             [
-               'category_id' => 1,
+                'category_id' => 1,
                 'status_product_id' => 1,
                 'name' => 'Fideos',
                 'description' => 'bbb',

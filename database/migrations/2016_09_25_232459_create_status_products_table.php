@@ -15,13 +15,9 @@ class CreateStatusProductsTable extends Migration
     {
         Schema::create('status_products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->text('comment')->nullable();
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table->timestamps();           
         });
     }
 
