@@ -11,6 +11,9 @@ use Taller\Http\Requests\OrderCreateRequest;
 use Taller\Http\Requests\OrderUpdateRequest;
 use Taller\Repositories\OrderRepository;
 use Taller\Validators\OrderValidator;
+use Taller\Entities\Order;
+use Lang;
+
 
 
 class OrdersController extends Controller
@@ -42,6 +45,7 @@ class OrdersController extends Controller
     {
         $orders = $this->repository->paginate(5);
         return view('orders.index', compact('orders'));
+    
     }
 
     /**
@@ -58,44 +62,22 @@ class OrdersController extends Controller
     }
 
 
-    public function store(OrderCreateRequest $request)
+    public function store(Request $request)
     {
 
         $this->validate($request, [
-            'name' => 'required|unique:orders,name',
+            'user_id' => 'required|unique:orders,user_id',
+            'shipping_place' => 'required',
         ]);
 
-        $this->repository->create($request->toArray());
-        
-        $notification = array(
-            'message' => Lang::get('messages.create_role'),
-            'alert-type' => 'success'
-        );
+        $order = new Order();
+        $order->user_id = $request->input('user_id');
+        $order->shipping_place = $request->input('shipping_place');
+        $order->save();
 
         return redirect()->route('orders.index')
-            ->with($notification);
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $order = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $order,
-            ]);
-        }
-
-        return view('orders.show', compact('order'));
+            ->with('success','Orden editada correctamente');
+            //->with($notification);
     }
 
 
@@ -123,22 +105,23 @@ class OrdersController extends Controller
      *
      * @return Response
      */
-    public function update(OrderUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
        $this->validate($request, [
-            'name' => 'required|unique:orders,name'.$id,
+            'user_id' => 'required|unique:orders,user_id',
+            'shipping_place' => 'required',
         ]);
 
-        $orders = $this->repository->update($id, $request->all());
 
-        $notification = array(
-            'message' => Lang::get('messages.edit_role'),
-            'alert-type' => 'success'
-        );
+        $order = new Order();
+        $order->user_id = $request->input('user_id');
+        $order->shipping_place = $request->input('shipping_place');
+        $order->save();
 
         return redirect()->route('orders.index')
-            ->with($notification);
+            ->with('success','Orden editada correctamente');
+            //->with($notification);
     }
 
 

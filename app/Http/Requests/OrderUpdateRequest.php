@@ -23,8 +23,14 @@ class OrderUpdateRequest extends FormRequest
      */
     public function rules()
     {
+     
+    $id = $this->route()->parameter('id'); //** ATENTO **//
+     
         return [
-            //
+            
+            'user_id' => 'required|unique:orders,user_id', 
+            'shipping_place' => 'required',
+
         ];
     }
 }

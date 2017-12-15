@@ -13,7 +13,7 @@ class OrderCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class OrderCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            //'user_id' => 'required|unique:orders,user_id',
+            'shipping_place' => 'required',
+            
         ];
     }
 }
