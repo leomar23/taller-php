@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.users_show_title')
-            <small>@lang('pages.role_show_title')</small>
+            Ver Usuario
+            <small>Ver Rol</small>
         </h1>
         <ul class="content-header-buttons">
             {{--<a class="btn btn-default" href="{{ route('users.index') }}"> @lang('buttons.back')</a>--}}

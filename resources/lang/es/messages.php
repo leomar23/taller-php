@@ -24,7 +24,7 @@ return[
     'delete_coin'=>'Moneda Eliminada',
     //OTROS
     'delete_message'=>'Esta seguro?',
-    'delete_message_text'=>'De eliminar el elemento',
+    'delete_message_text'=>'¿Desea eliminar el elemento?',
     //PERMISSION
     'create_permission'=>'Operación Creada Satisfactoriamente',
     'edit_permission'=>'Operación Editada Satisfactoriamente',

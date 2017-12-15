@@ -59,12 +59,15 @@ class RoleController extends Controller
             $role->attachPermission($value);
         }
 
-        
-        $notification = array(
-            'message' => Lang::get('messages.create_role'),
-            'alert-type' => 'success'
+
+        $notification = array(             
+            'message' => ('Rol creado satisfactoriamente'),             
+            'alert-type' => 'success'         
         );
         
+        return redirect()->route('roles.index')
+            ->with($notification);
+
 
         return redirect()->route('roles.index')
             ->with($notification);
@@ -128,8 +131,13 @@ class RoleController extends Controller
             $role->attachPermission($value);
         }
 
+         $notification = array(             
+            'message' => ('Rol actualizado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
         return redirect()->route('roles.index')
-            ->with('success','Role updated successfully');
+            ->with($notification);
     }
     /**
      * Remove the specified resource from storage.
@@ -140,7 +148,14 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
+
+        $notification = array(             
+            'message' => ('Rol eliminado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
         return redirect()->route('roles.index')
-            ->with('success','Role deleted successfully');
+            ->with($notification);
+
     }
 }

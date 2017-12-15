@@ -4,7 +4,7 @@
 <section class="content-header animated fadeIn fast">
         <h1>
             Comercios
-            <small>Lista Comercios</small>
+            <small>Lista de Comercios</small>
         </h1>
         <br>
         @if (Entrust::can('business-create'))

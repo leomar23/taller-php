@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.permission_index_title')
-            <small>@lang('pages.permission_index_subtitle')</small>
+            Gestión de Permisos
+            <small>Lista de Permisos</small>
         </h1>
         <br>
         @if (Entrust::can('permission-create'))

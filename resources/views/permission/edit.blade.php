@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.permission_edit_title')
+            Editar Permiso
             <small>{{$permission->display_name}}</small>
         </h1>
         <br>

@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.users_create_title')
-            <small>@lang('pages.users_create_subtitle')</small>
+            Crear Usuario
+            <small>Crear</small>
         </h1>
         <br>
         <a class="btn btn-default btn-st" href="{{ route('users.index') }}"> @lang('buttons.back')</a>

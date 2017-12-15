@@ -92,8 +92,13 @@ class BusinessController extends Controller
         $business->location = $request->input('location');
         $business->save();
 
+        $notification = array(             
+            'message' => ('Comercio creado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
         return redirect()->route('business.index')
-            ->with('success','Comercio creado correctamente');
+            ->with($notification);
 
         /*try {
 
@@ -191,8 +196,13 @@ class BusinessController extends Controller
         $business->location = $request->input('location');
         $business->save();
 
+        $notification = array(             
+            'message' => ('Comercio actualizado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
         return redirect()->route('business.index')
-            ->with('success','Comercio editado correctamente');
+            ->with($notification);
     }
 
 
@@ -210,11 +220,18 @@ class BusinessController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Business deleted.',
+                
                 'deleted' => $deleted,
+
             ]);
         }
 
-        return redirect()->back()->with('message', 'Business deleted.');
+        $notification = array(             
+            'message' => ('Comercio eliminado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
+        return redirect()->route('business.index')
+            ->with($notification);
     }
 }
