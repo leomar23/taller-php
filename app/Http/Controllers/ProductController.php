@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Taller\Entities\StatusProduct;
 use Taller\Entities\Coin;
 use Taller\Entities\TypeProduct;
+use Lang;
 
 //use Taller\Product;
 //use Illuminate\Http\Request;
@@ -49,8 +50,8 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $data = $this->repository->paginate(5);
-        return view('product.index',compact('data'));
+        $products = $this->repository->paginate(5);
+        return view('product.index',compact('products'));
         //->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -61,13 +62,19 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $status = StatusProduct::pluck('name','id');
-        $coin = Coin::pluck('symbol','id');
-        $cat = Category::pluck('name','id');
-        return view('product.create',compact('status','coin','cat'));
+        /*
+        $categories = Category::get()->where('id' = $this->);
+
+        $categori = DB::table('categories')->where('id', $this id)->first()->select('name');
+
+        */
+
+        $category = 'Alimentos';
+
+        return view('product.create',compact('category'));
     }
 
-    public function getTypeProject(Request $request, $id)
+    public function getTypeProduct(Request $request, $id)
     {
         if($request->ajax()){
             $types = $this->repositoryStatusProduct->findByField('category_id',$id);
@@ -85,46 +92,29 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:products,name',
-            'title' => 'required',
-            'address' => 'required',
+
+            'category_id' => 'required',
+            'status_product_id' => 'required',
+            'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'cover_route' => 'required'
+            'bar_code' => 'required',
+            'image' => 'required',
+            'price' => 'required'
+
         ]);
 
         $product = new Product();
+        $product->category_id = $request->input('category_id');
+        $product->status_product_id = $request->input(1);
         $product->name = $request->input('name');
-        $product->url = str_replace(" ","-",strtolower($request->input('name')));
-        $url = $product->url;
-        $product->title = $request->input('title');
         $product->description = $request->input('description');
-        $product->tags = $request->input('tags');
-        //$proyect->coin = "$";
+        $product->bar_code = $request->input('bar_code');
+        $product->image = $request->input('image');
         $product->price = $request->input('price');
-        //$product->value_now = 0;
-        //$request->user()->proyects()->save();
-        $product->user_id = Auth::user()->id;
-        $product->category_id = $request->input('category_id');;
-        $product->coin_id = $request->input('coin_id');
-        $product->status_project_id = $request->input('status_project_id');
-        $product->type_project_id = $request->input('type_project_id');
+        $product->save();
 
-        //STATUS
-        $status = StatusProject::query()->where('id',$request->input('status_project_id'))->first();
-        if($status->name == "Publicado"){
-            $product->active = 1;
-            $product->date_start = Carbon::now();
-        }else if($status->name == "Rechazado" || $status->name == "Cerrado"){
-            $product->active = 0;
-            $pproduct->date_end = Carbon::now();
-        }else{
-            $product->active = 0;
-        }
-        //END STATUS
 
-        //$product->client_id = Auth::user()->id;
-
+        /*
         //IMAGEN PROJECT
         $name_product = $request->input('name');
         $file = $request->file('cover_route');
@@ -134,20 +124,16 @@ class ProductController extends Controller
         $name = Carbon::now()->timestamp.'-'.md5($name_product).'.'.$ext;
         $file->move($destinationPath, $name);
         //END IMAGEN PROJECT
+        */
 
-        $product->cover_route = $name;
-        $product->save();
 
-        //$old = Project::query()->where('url', $url)->first();//$this->repository->create($proyect->attributesToArray());
-/*      $financial = new Financial();
-        $financial->project_id = $old->id;
-        $financial->project_deadline = $request->input('project_deadline');
-        $financial->date_first_return = $request->input('date_first_return');
-        $financial->projected_profitability = $request->input('projected_profitability');
-        $financial->save();*/
-
-        return redirect()->route('product.admin')
-            ->with('success','Product created successfully');
+        $notification = array(             
+            'message' => ('Producto creado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
+        return redirect()->route('product.index')
+            ->with($notification);
     }
 
     /**
@@ -168,10 +154,10 @@ class ProductController extends Controller
      * @param  \Taller\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        $pro = $this->repository->find($id);
-        return view('project.edit',compact('pro'));
+        $product = $this->repository->find($id);
+        return view('product.edit',compact('product'));
     }
 
     /**
@@ -181,19 +167,37 @@ class ProductController extends Controller
      * @param  \Taller\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,  $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:projects,name',
-            'title' => 'required',
+            
+            'category_id' => 'required',
+            'status_product_id' => 'required',
+            'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'bar_code' => 'required',
+            'image' => 'required',
+            'price' => 'required'
+        
         ]);
 
-        $this->repository->update($request->toArray(),$id);
+        $product = Product::find($id);
+        $product->category_id = $request->input('category_id');
+        $product->status_product_id = $request->input(1);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->bar_code = $request->input('bar_code');
+        $product->image = $request->input('image');
+        $product->price = $request->input('price');
+        $product->save();
 
-        return redirect()->route('project.admin')
-            ->with('success','Project updated successfully');
+        $notification = array(             
+            'message' => ('Producto actualizado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
+        return redirect()->route('product.index')
+            ->with($notification);
     }
 
     /**
@@ -202,10 +206,16 @@ class ProductController extends Controller
      * @param  \Taller\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         $this->repository->delete($id);
-        return redirect()->route('project.admin')
-            ->with('success','Project deleted successfully');
+
+        $notification = array(             
+            'message' => ('Producto eliminado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
+        return redirect()->route('product.index')
+            ->with($notification);
     }
 }

@@ -56,3 +56,11 @@
         @endif
         <a href="{{ route('orders.index') }}"><i class="fa fa-users"></i><span>Ordenes</span></a></li>
      @endif
+     @if (Entrust::can('product-list'))
+        @if(Route::is('product.index'))
+             <li class="active">
+        @else
+             <li>
+        @endif
+        <a href="{{ route('product.index') }}"><i class="fa fa-users"></i><span>Productos</span></a></li>
+     @endif

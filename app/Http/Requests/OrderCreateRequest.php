@@ -25,7 +25,7 @@ class OrderCreateRequest extends FormRequest
     {
         return [
             
-            //'user_id' => 'required|unique:orders,user_id',
+            //'user_id' => 'required|unique:orders,user_id', 
             'shipping_place' => 'required',
             
         ];

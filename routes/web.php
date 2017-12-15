@@ -25,18 +25,17 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('admin',['as'=>'admin.index','uses'=>'AdminController@index','middleware' => ['permission:admin-index']]);
 
     Route::resource('users','UserController');
-       
+       s
     //PRODUCT
-    Route::get('product/admin',['as'=>'product.admin','uses'=>'ProductController@admin']);
-    Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create']);
-    Route::post('product/create',['as'=>'product.store','uses'=>'ProductController@store']);
-    Route::get('product/{id}',['as'=>'product.show','uses'=>'ProductController@show']);
-    Route::get('product/{id}/edit',['as'=>'product.edit','uses'=>'ProductController@edit']);
-    Route::patch('product/{id}',['as'=>'product.update','uses'=>'ProductController@update']);
-    Route::delete('product/{id}',['as'=>'product.destroy','uses'=>'ProductController@destroy','middleware' => ['permission:project-delete']]);
+    Route::get('product',['as'=>'product.index','uses'=>'ProductController@index','middleware' => ['permission:product-list|product-create|product-edit|product-delete']]);
+    Route::get('product/create',['as'=>'product.create','uses'=>'ProductController@create','middleware' => ['permission:product-create']]);
+    Route::post('product/create',['as'=>'product.store','uses'=>'ProductController@store','middleware' => ['permission:product-create']]);
+    Route::get('product/{id}',['as'=>'product.show','uses'=>'ProductController@show','middleware' => ['permission:product-edit']]);
+    Route::get('product/{id}/edit',['as'=>'product.edit','uses'=>'ProductController@edit','middleware' => ['permission:product-edit']]);
+    Route::patch('product/{id}',['as'=>'product.update','uses'=>'ProductController@update','middleware' => ['permission:product-edit']]);
+    Route::delete('product/{id}',['as'=>'product.destroy','uses'=>'ProductController@destroy','middleware' => ['permission:product-delete']]);
     
     //USER
-    Route::get('users',['as'=>'users.index','uses'=>'UserController@index','middleware' => ['permission:user-list|user-create|user-edit|user-delete']]);
     Route::get('users/create',['as'=>'users.create','uses'=>'UserController@create','middleware' => ['permission:user-create']]);
     Route::post('users/create',['as'=>'users.store','uses'=>'UserController@store','middleware' => ['permission:user-create']]);
     Route::get('users/{id}',['as'=>'users.show','uses'=>'UserController@show']);

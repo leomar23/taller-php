@@ -1,5 +1,6 @@
 <?php
  return[
+     'bar_code' => 'Codigo de Barra',
      'no' => 'Nro',
      'password' => 'Contraseña',
      'name' => 'Nombre',

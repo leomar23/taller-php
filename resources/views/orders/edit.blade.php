@@ -16,10 +16,10 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-8">
-                        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label>@lang('labels.name')</label>
-                            {!! Form::text('name', null, array('placeholder' => Lang::get('labels.name'),'class' => 'form-control border-input')) !!}
-                            {!! $errors->first('name', '<span class="help-block text-danger">:message</span>') !!}
+                        <div class="form-group {{ $errors->has('user_id') ? ' has-error' : '' }}">
+                            <label>@lang('labels.user_id')</label>
+                            {!! Form::text('user_id', null, array('placeholder' => Lang::get('labels.user_id'),'class' => 'form-control border-input')) !!}
+                            {!! $errors->first('user_id', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                         <div class="form-group {{ $errors->has('display_name') ? ' has-error' : '' }}">
                             <label>@lang('labels.display_name')</label>

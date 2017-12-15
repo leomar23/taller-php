@@ -58,7 +58,9 @@ class OrdersController extends Controller
 
     public function create()
     {
-        return view('orders.create');
+        $users = User::pluck('name','id')->toArray();
+
+        return view('orders.create', compact('users'));
     }
 
 

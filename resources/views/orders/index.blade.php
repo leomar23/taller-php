@@ -19,7 +19,7 @@
                     <table class="table">
                         <tr>
                             {{--<th>@lang('labels.no')</th>--}}
-                            <th>@lang('labels.name')</th>
+                            <th>@lang('labels.user_id')</th>
                             <th>@lang('labels.display_name')</th>
                             <th class="hidden-xs">@lang('labels.description')</th>
                             <th width="280px">@lang('labels.actions')</th>
@@ -28,7 +28,7 @@
                         @foreach ($orders as $key => $order)
                             <tr>
                                 {{--<td>{{ $order->id }}</td>--}}
-                                <td>{{ $order->name }}</td>
+                                <td>{{ $order->user_id }}</td>
                                 <td>{{ $order->display_name }}</td>
                                 <td class="hidden-xs">{{ $order->description }}</td>
                                 <td>
