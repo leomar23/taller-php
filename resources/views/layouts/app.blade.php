@@ -35,16 +35,16 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    WoooW
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/home') }}">Inicio</a></li>
                     @if (Entrust::can('admin-index'))
-                    <li><a href="{{ url('/admin') }}">Admin</a></li>
+                    <li><a href="{{ url('/admin') }}">Administrador</a></li>
                     @endif
                 </ul>
 

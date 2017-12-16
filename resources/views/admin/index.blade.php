@@ -7,7 +7,7 @@
                     <div class="jumbotron" style="background-color:transparent;">
                         <h1>¡Bienvenido!</h1>
                         <br>
-                        <h2>Taller PHP 2017 - Grupo --</h2>
+                        <h2>Taller PHP 2017 - Grupo 2</h2>
                         <h3>Integrantes</h3>
                         <ol>
                             <li>Ángela Cayetano</li>
