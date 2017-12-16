@@ -38,7 +38,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>T</b>AD</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">PHPADMIN</span>
+            <span class="logo-lg">WoooW</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -352,7 +352,7 @@
 
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2017 TALLER PHP - GRUPO N° -- .</strong>
+        <strong>Copyright &copy; 2017 TALLER PHP - GRUPO N° 2 .</strong>
     </footer>
 
     <!-- RIGHT MENU -->
