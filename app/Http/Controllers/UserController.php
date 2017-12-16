@@ -31,12 +31,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('display_name','id')->toArray();
-        $userRole = Role::pluck('id','id')->toArray();
 
-       // dd($userRole);
-
-
-        return view('users.create', compact('roles','userRole'));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -139,18 +135,24 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
+
+        DB::table('role_user')->where('user_id', $id)->delete();
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->last_name = $request->input('last_name');
         $user->phone = $request->input('phone');
         $user->birth_date = $request->input('birth_date');
         $user->gender = $request->input('gender');
-        $user->password = $request->input('password');
-        
+        $user->password = Hash::make($request->input('password'));
         $user->remember_token = $request->input('remember_token');
         
         $user->save();
-        $user->update($input);
+
+        //$user->update($input);
+
+        DB::table('role_user')->where('user_id', '=', $id)->delete();
+
         foreach ($request->input('roles') as $key => $value) {
             $user->attachRole($value);
         }
@@ -163,23 +165,6 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
                ->with($notification);
-
-
-
-
-
-
-
-
-
-        
-
-     
-        //DB::table('role_user')->where('user_id',$id)->delete();
-
-
-        
-
         
     }
 

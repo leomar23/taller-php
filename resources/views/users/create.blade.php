@@ -83,7 +83,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                                 <label>@lang('labels.role')</label> 
-                                {!! Form::select('status_id', $userRole, 1) !!}
+                                {!! Form::select('status_id', $roles, 1) !!}
                                 {!! $errors->first('status_id', '<span class="help-block text-danger">:message</span>') !!}
                             </div>
                         </div>
