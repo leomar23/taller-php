@@ -87,42 +87,6 @@ class CategoryController extends Controller
 
         return redirect()->route('category.index')
             ->with($notification);
-        
-        /*$notification = array(
-            'message' => Lang::get('messages.create_category'),
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('category.index')
-            ->with($notification);*/
-
-        /*try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $category = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Category created.',
-                'data'    => $category->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }*/
     }
 
 

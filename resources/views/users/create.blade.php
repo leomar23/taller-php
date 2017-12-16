@@ -11,9 +11,9 @@
 
     </section>
     <section class="content container-fluid">
+    {!! Form::open(array('route' => 'users.store','method'=>'POST','id'=>'user-form')) !!}
         <div class="box">
-            <div class="box-body">
-                {!! Form::open(array('route' => 'users.store','method'=>'POST','id'=>'user-form')) !!}
+            <div class="box-body">                
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -87,28 +87,31 @@
 
                             </div>
                         </div>
+                        
                         {{--<div class="col-xs-12 col-sm-6 col-md-6">--}}
                             {{--<div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">--}}
                                 {{--<label>@lang('labels.status')</label>{!! $errors->first('status_id', '<span class="help-block text-danger">:message</span>') !!}--}}
                                 {{--{!! Form::select('status_id',$status,null, ['placeholder' => Lang::get('labels.default_select_status'),'class' => 'form-control border-input']) !!}--}}
-
                             {{--</div>--}}
                         {{--</div>--}}
+                    
                     </div>
+                    
                     {{--<div class="col-xs-12 col-sm-12 col-md-12 text-right">--}}
                         {{--<button type="submit" class="btn btn-tl-outline">@lang('buttons.submit')</button>--}}
                     {{--</div>--}}
-                </div>
-                {!! Form::close() !!}
 
+                </div>
             </div>
             <div class="box-footer">
                 <div class="text-right">
                     <a class="btn btn-default btn-tl-outline" href="{{ route('users.index') }}"> @lang('buttons.cancel')</a>
-                    <button type="submit" class="btn btn-tl">@lang('buttons.submit')</button>
+                    <button type="submit" class="btn btn-success">@lang('buttons.submit')</button>
                 </div>
             </div>
         </div>
+        {!! Form::hidden('status_id', 1, array('placeholder' => Lang::get('labels.status_id'), 'class' => 'form-control  border-input')) !!}
+        {!! Form::close() !!}
     </section>
 @endsection
 

@@ -31,7 +31,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('display_name','id');
-        return view('users.create',compact('roles'));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -42,6 +42,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -57,8 +58,14 @@ class UserController extends Controller
             $user->attachRole($value);
         }
 
+        $notification = array(
+            'message' => (
+                'Usuario creado satisfactoriamente'),
+                'alert-type' => 'success'
+            );
+
         return redirect()->route('users.index')
-            ->with('success','User created successfully');
+               ->with($notification);
     }
 
     /**
@@ -120,8 +127,14 @@ class UserController extends Controller
             $user->attachRole($value);
         }
 
+        $notification = array(
+            'message' => (
+                'Usuario actualizado satisfactoriamente'),
+                'alert-type' => 'success'
+            );
+
         return redirect()->route('users.index')
-            ->with('success','User updated successfully');
+               ->with($notification);
     }
 
     /**
@@ -133,7 +146,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
+
+        $notification = array(
+            'message' => (
+                'Usuario eliminado satisfactoriamente'),
+                'alert-type' => 'success'
+            );
+
         return redirect()->route('users.index')
-            ->with('success','User deleted successfully');
+               ->with($notification);
     }
 }
