@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.role_create_title')
-            <small>@lang('pages.role_create_subtitle')</small>
+            Crear Rol
+            Crear
         </h1>
         <br>
         <a class="btn btn-default btn-st" href="{{ route('roles.index') }}"> @lang('buttons.back')</a>

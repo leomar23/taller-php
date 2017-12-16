@@ -3,7 +3,7 @@
 @section('content')
      <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.users_edit_title')
+            Editar Usuario
             <small>{{ $user->name }} {{ $user->last_name }}</small>
         </h1>
          <br>
