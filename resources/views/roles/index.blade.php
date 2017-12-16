@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.role_index_title')
-            <small>@lang('pages.role_index_subtitle')</small>
+            Gestión de Roles
+            <small>Lista de Roles</small>
         </h1>
         <br>
         @if (Entrust::can('role-create'))

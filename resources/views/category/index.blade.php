@@ -4,7 +4,7 @@
 <section class="content-header animated fadeIn fast">
         <h1>
             Categorias
-            <small>Lista Categorias</small>
+            <small>Lista de Categorias</small>
         </h1>
         <br>
         @if (Entrust::can('category-create'))

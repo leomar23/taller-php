@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
       <h1>
-        @lang('pages.users_index_title')
-        <small>@lang('pages.users_index_subtitle')</small>
+        Gestión de Usuarios
+        <small>Lista de Usuarios</small>
       </h1>
       <br>
       @if (Entrust::can('user-create'))

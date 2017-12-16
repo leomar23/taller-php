@@ -3,8 +3,8 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            @lang('pages.permission_create_title')
-            <small>@lang('pages.permission_create_subtitle')</small>
+            Crear Permiso
+            <small>Crear</small>
         </h1>
         <br>
         <a class="btn btn-default btn-st" href="{{ route('permission.index') }}"> @lang('buttons.back')</a></li>

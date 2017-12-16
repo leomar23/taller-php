@@ -81,7 +81,7 @@ class CategoryController extends Controller
         /*$this->repository->create($request->toArray());*/
 
         $notification = array(
-            'message' => 'Categoría creada con éxito',
+            'message' => 'Categoría creada satisfactoriamente',
             'alert-type' => 'success'
         );
 
@@ -173,7 +173,7 @@ class CategoryController extends Controller
         $category->save();
 
         $notification = array(
-            'message' => 'Categoría editada con éxito',
+            'message' => 'Categoría editada satisfactoriamente',
             'alert-type' => 'success'
         );
 
@@ -204,14 +204,12 @@ class CategoryController extends Controller
     {
         $deleted = $this->repository->delete($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Categoría eliminada.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'Categoría eliminada.');
+        $notification = array(             
+            'message' => ('Categoria eliminada satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
+        return redirect()->route('category.index')
+            ->with($notification);
     }
 }

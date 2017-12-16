@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header animated fadeIn fast">
         <h1>
-            Productos
+            Productos 
             <small>Nuevo Producto</small>
         </h1>
         <br>

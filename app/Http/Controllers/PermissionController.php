@@ -50,14 +50,16 @@ class PermissionController extends BaseController
         $input = $request->all();
         $perm = Permission::create($input);
 
-        $notification = array(
-            'message' => Lang::get('messages.create_permission'),
-            'alert-type' => 'success'
+
+        $notification = array(             
+            'message' => ('Permiso creado satisfactoriamente'),             
+            'alert-type' => 'success'         
         );
-
-
+        
         return redirect()->route('permission.index')
             ->with($notification);
+
+
     }
 
     /**
@@ -102,11 +104,11 @@ class PermissionController extends BaseController
         $permission->description = $request->input('description');
         $permission->save();
 
-        $notification = array(
-            'message' => Lang::get('messages.edit_permission'),
-            'alert-type' => 'success'
+        $notification = array(             
+            'message' => ('Permiso actualizado satisfactoriamente'),             
+            'alert-type' => 'success'         
         );
-
+        
         return redirect()->route('permission.index')
             ->with($notification);
     }
@@ -120,10 +122,12 @@ class PermissionController extends BaseController
     public function destroy($id)
     {
         Permission::find($id)->delete();
-        $notification = array(
-            'message' => Lang::get('messages.delete_permission'),
-            'alert-type' => 'success'
+
+       $notification = array(             
+            'message' => ('Permiso eliminado satisfactoriamente'),             
+            'alert-type' => 'success'         
         );
+        
         return redirect()->route('permission.index')
             ->with($notification);
     }
