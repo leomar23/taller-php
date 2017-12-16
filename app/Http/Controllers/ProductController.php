@@ -40,18 +40,12 @@ class ProductController extends Controller
             $this->validator  = $validator;
         }
 
-    // public function index(Request $request)
-    // {
-    //     $data = $this->repository->findByField('active',true);
-    //     return view('product.index',compact('data'));
-    // }
-
     public function index(Request $request)
     {
         $products = $this->repository->paginate(5);
         $categories = Category::pluck('name', 'id')->toArray();
-        return view('product.index', compact('products', 'categories'));
-        //->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('product.index', compact('products', 'categories'))
+               ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -61,13 +55,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        /*
-        $categories = Category::get()->where('id' = $this->);
-
-        $categori = DB::table('categories')->where('id', $this id)->first()->select('name');
-
-        */
-
         $categories = Category::pluck('name', 'id')->toArray();
 
         return view('product.create',compact('categories'));
@@ -169,23 +156,23 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             
-            'category_id' => 'required',
-            'status_product_id' => 'required',
+            //'category_id' => 'required',
+            //'status_product_id' => 'required',
             'name' => 'required',
             'description' => 'required',
-            'bar_code' => 'required',
-            'image' => 'required',
+            //'bar_code' => 'required',
+            //'image' => 'required',
             'price' => 'required'
         
         ]);
 
         $product = Product::find($id);
-        $product->category_id = $request->input('category_id');
-        $product->status_product_id = $request->input(1);
+        //$product->category_id = $request->input('category_id');
+        //$product->status_product_id = $request->input(1);
         $product->name = $request->input('name');
         $product->description = $request->input('description');
-        $product->bar_code = $request->input('bar_code');
-        $product->image = $request->input('image');
+        //$product->bar_code = $request->input('bar_code');
+        //$product->image = $request->input('image');
         $product->price = $request->input('price');
         $product->save();
 

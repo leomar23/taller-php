@@ -18,20 +18,17 @@
                 {{-- <div class="table-responsive"> --}}
                     <table class="table">
                         <tr>
-                            {{--<th>@lang('labels.no')</th>--}}
-                            <th>@lang('labels.user_id')</th>
-                            <th>@lang('labels.display_name')</th>
-                            <th class="hidden-xs">@lang('labels.description')</th>
-                            <th width="280px">@lang('labels.actions')</th>
+                            <th>¿Quién la realiza?</th>
+                            <th>Dirección de envío</th>
+                            <!-- <th width="280px">@lang('labels.actions')</th> -->
 
                         </tr>
                         @foreach ($orders as $key => $order)
                             <tr>
-                                {{--<td>{{ $order->id }}</td>--}}
-                                <td>{{ $order->user_id }}</td>
-                                <td>{{ $order->display_name }}</td>
-                                <td class="hidden-xs">{{ $order->description }}</td>
-                                <td>
+                                <td>{{ $users[$order->id] }}</td>
+                                <!-- <td>{{ $order->display_name }}</td> -->
+                                <td>{{ $order->shipping_place }}</td>
+                                <!-- <td>
                                     <a class="btn btn-default btn-st" href="{{ route('orders.show',$order->id) }}"><i class="fa fa-eye"></i>@lang('buttons.show')</a>
                                     @if (Entrust::can('orders-edit'))
                                         <a class="btn btn-default btn-st" href="{{ route('orders.edit',$order->id) }}"><i class="fa fa-pencil"></i>@lang('buttons.edit')</a>
@@ -41,7 +38,7 @@
                                         <button type="button" onclick="beforeDel({{ $order->id }})" class="btn btn-default btn-st">@lang('buttons.delete')</button>
                                         {!! Form::close() !!}
                                     @endif
-                                </td>
+                                </td> -->
                             </tr>
                         @endforeach
                     </table>

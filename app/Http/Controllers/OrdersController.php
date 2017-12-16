@@ -12,6 +12,7 @@ use Taller\Http\Requests\OrderUpdateRequest;
 use Taller\Repositories\OrderRepository;
 use Taller\Validators\OrderValidator;
 use Taller\Entities\Order;
+use Taller\User;
 use Lang;
 
 
@@ -44,8 +45,8 @@ class OrdersController extends Controller
     public function index()    
     {
         $orders = $this->repository->paginate(5);
-        return view('orders.index', compact('orders'));
-    
+        $users = User::pluck('name','id')->toArray();
+        return view('orders.index', compact('orders', 'users'));    
     }
 
     /**

@@ -24,12 +24,12 @@ class ProductUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required',
-            'status_product_id' => 'required',
+            //'category_id' => 'required',
+            //'status_product_id' => 'required',
             'name' => 'required',
             'description' => 'required',
-            'bar_code' => 'required',
-            'image' => 'required',
+            //'bar_code' => 'required',
+            //'image' => 'required',
             'price' => 'required'
         ];
     }
