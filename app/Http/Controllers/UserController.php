@@ -31,7 +31,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('display_name','id')->toArray();
-        //$userRole = Role::pluck('id','id')->toArray();
+        $userRole = Role::pluck('id','id')->toArray();
 
        // dd($userRole);
 
@@ -52,22 +52,27 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required',
+            //'roles' => 'required',
         ]);
         
         $input = $request->all();
         
         $user = new User();
+
+        $rol = Role::find($request->input('status_id')); // Camuflado el Rol
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->last_name = $request->input('last_name');
         $user->phone = $request->input('phone');
         $user->birth_date = $request->input('birth_date');
         $user->gender = $request->input('gender');
-        $user->password = Hash::make($input['password']);        
-        $user->status_id = $request->input('status_id');
+        $user->password = Hash::make($input['password']);  
+        $user->status_id = 1;
         $user->remember_token = $request->input('remember_token');
         $user->save();
+
+        $user->attachRole($rol);
 
         
         $notification = array(             
@@ -77,13 +82,6 @@ class UserController extends Controller
         
         return redirect()->route('users.index')
             ->with($notification);
-
-        foreach ($request->input('roles') as $key => $value) {
-            $user->attachRole($value);
-                    
-
-        }
-
         
     }
 

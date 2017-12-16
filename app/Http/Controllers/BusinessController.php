@@ -178,15 +178,11 @@ class BusinessController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id, $request);
-
         $this->validate($request, [
             'name' => 'required|unique:businesses,name',
             'owner_id' => 'required',
             'location' => 'required'
         ]);
-
-        dd($id, $request);
 
         //$business = $this->repository->update($id, $request->all());
 

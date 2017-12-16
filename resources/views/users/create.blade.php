@@ -81,12 +81,14 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="form-group {{ $errors->has('roles') ? ' has-error' : '' }}">
-                                <label>@lang('labels.role')</label> {!! $errors->first('roles', '<span class="help-block text-danger">:message</span>') !!}
-                                {!! Form::select('roles[]', $roles,[], array('class' => 'form-control border-input','placeholder' => Lang::get('labels.default_select_status'))) !!}
-
+                            <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
+                                <label>@lang('labels.role')</label> 
+                                {!! Form::select('status_id', $userRole, 1) !!}
+                                {!! $errors->first('status_id', '<span class="help-block text-danger">:message</span>') !!}
                             </div>
                         </div>
+
+                    </div>
                         
                         {{--<div class="col-xs-12 col-sm-6 col-md-6">--}}
                             {{--<div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">--}}
@@ -110,7 +112,7 @@
                 </div>
             </div>
         </div>
-        {!! Form::hidden('status_id', 1, array('placeholder' => Lang::get('labels.status_id'), 'class' => 'form-control  border-input')) !!}
+        <!-- {!! Form::hidden('status_id', 1, array('placeholder' => Lang::get('labels.status_id'), 'class' => 'form-control  border-input')) !!} -->
         {!! Form::close() !!}
     </section>
 @endsection

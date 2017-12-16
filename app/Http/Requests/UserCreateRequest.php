@@ -21,7 +21,7 @@ class UserCreateRequest extends FormRequest
             'gender' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            //'roles' => 'required'
         ];
     }
 
