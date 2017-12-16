@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace Taller\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -30,8 +30,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('display_name','id');
-        return view('users.create', compact('roles'));
+        $roles = Role::pluck('display_name','id')->toArray();
+        //$userRole = Role::pluck('id','id')->toArray();
+
+       // dd($userRole);
+
+
+        return view('users.create', compact('roles','userRole'));
     }
 
     /**
@@ -42,30 +47,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
         ]);
-
+        
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->last_name = $request->input('last_name');
+        $user->phone = $request->input('phone');
+        $user->birth_date = $request->input('birth_date');
+        $user->gender = $request->input('gender');
+        $user->password = Hash::make($input['password']);        
+        $user->status_id = $request->input('status_id');
+        $user->remember_token = $request->input('remember_token');
+        $user->save();
 
-        $user = User::create($input);
+        
+        $notification = array(             
+            'message' => ('Usuario creado satisfactoriamente'),             
+            'alert-type' => 'success'         
+        );
+        
+        return redirect()->route('users.index')
+            ->with($notification);
+
         foreach ($request->input('roles') as $key => $value) {
             $user->attachRole($value);
+                    
+
         }
 
-        $notification = array(
-            'message' => (
-                'Usuario creado satisfactoriamente'),
-                'alert-type' => 'success'
-            );
-
-        return redirect()->route('users.index')
-               ->with($notification);
+        
     }
 
     /**
@@ -92,6 +111,8 @@ class UserController extends Controller
         $roles = Role::pluck('display_name','id');
         $userRole = $user->roles->pluck('id','id')->toArray();
 
+        //dd($userRole);
+
         return view('users.edit',compact('user','roles','userRole'));
     }
 
@@ -107,9 +128,10 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
+            'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
+
 
         $input = $request->all();
         if(!empty($input['password'])){
@@ -119,10 +141,18 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->last_name = $request->input('last_name');
+        $user->phone = $request->input('phone');
+        $user->birth_date = $request->input('birth_date');
+        $user->gender = $request->input('gender');
+        $user->password = $request->input('password');
+        
+        $user->remember_token = $request->input('remember_token');
+        
+        $user->save();
         $user->update($input);
-        DB::table('role_user')->where('user_id',$id)->delete();
-
-
         foreach ($request->input('roles') as $key => $value) {
             $user->attachRole($value);
         }
@@ -135,6 +165,24 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
                ->with($notification);
+
+
+
+
+
+
+
+
+
+        
+
+     
+        //DB::table('role_user')->where('user_id',$id)->delete();
+
+
+        
+
+        
     }
 
     /**

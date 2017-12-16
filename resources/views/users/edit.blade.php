@@ -91,7 +91,6 @@
                         {{--<button type="submit" class="btn btn-tl-outline">@lang('buttons.save')</button>--}}
                     {{--</div>--}}
                 </div>
-                {!! Form::close() !!}
             </div>
             <div class="box-footer">
                 <div class="text-right">
@@ -100,6 +99,8 @@
                 </div>
             </div>
         </div>
+        {!! Form::hidden('status_id', 1, array('placeholder' => Lang::get('labels.status_id'), 'class' => 'form-control  border-input')) !!}
+        {!! Form::close() !!}
     </section>
 @endsection
 
