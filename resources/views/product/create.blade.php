@@ -13,8 +13,7 @@
     <section class="content container-fluid">
         {!! Form::open(array('route' => 'product.store','method'=>'POST','id'=>'product-form')) !!}
         <div class="box">
-            <div class="box-body">
-                
+            <div class="box-body">                
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
@@ -51,11 +50,10 @@
                             {!! $errors->first('image', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                     </div>
-
-                      <div class="col-xs-12 col-sm-6 col-md-12">
+                    <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
                             <label>@lang('labels.price')</label>
-                            {!! Form::number('price',null,['class' => 'form-control border-input','step'=>'any']) !!}
+                            {!! Form::number('price', null, array('placeholder' => Lang::get('labels.price'),'class' => 'form-control border-input')) !!}
                             {!! $errors->first('price', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                     </div>

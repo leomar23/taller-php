@@ -35,7 +35,6 @@ class BusinessController extends Controller
         $this->validator  = $validator;
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -46,18 +45,6 @@ class BusinessController extends Controller
         $businesses = $this->repository->paginate(5);
 
         return view('business.index', compact('businesses'));
-
-        /*$this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $businesses = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $businesses,
-            ]);
-        }
-
-        return view('businesses.index', compact('businesses'));*/
     }
 
     public function create()
@@ -92,60 +79,14 @@ class BusinessController extends Controller
         $business->location = $request->input('location');
         $business->save();
 
+        $notification = array(
+            'message' => 'Comercio creado satisfactoriamente',
+            'alert-type' => 'success'
+        );
+
         return redirect()->route('business.index')
-            ->with('success','Comercio creado correctamente');
-
-        /*try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $business = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Business created.',
-                'data'    => $business->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }*/
+            ->with($notification);
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /*public function show($id)
-    {
-        $business = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $business,
-            ]);
-        }
-
-        return view('businesses.show', compact('business'));
-    }*/
-
 
     /**
      * Show the form for editing the specified resource.
@@ -162,7 +103,6 @@ class BusinessController extends Controller
         return view('business.edit', compact('business'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -173,15 +113,11 @@ class BusinessController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id, $request);
-
         $this->validate($request, [
-            'name' => 'required|unique:businesses,name',
+            'name' => 'required',
             'owner_id' => 'required',
             'location' => 'required'
         ]);
-
-        dd($id, $request);
 
         //$business = $this->repository->update($id, $request->all());
 
@@ -191,8 +127,13 @@ class BusinessController extends Controller
         $business->location = $request->input('location');
         $business->save();
 
+        $notification = array(
+            'message' => 'Comercio editado satisfactoriamente',
+            'alert-type' => 'success'
+        );
+
         return redirect()->route('business.index')
-            ->with('success','Comercio editado correctamente');
+            ->with($notification);
     }
 
 
@@ -215,6 +156,12 @@ class BusinessController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'Business deleted.');
+        $notification = array(
+            'message' => 'Comercio eliminado satisfactoriamente',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('business.index')
+            ->with($notification);
     }
 }

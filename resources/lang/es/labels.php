@@ -1,5 +1,6 @@
 <?php
  return[
+     'owner_id' => 'Propietario',     
      'bar_code' => 'Codigo de Barra',
      'no' => 'Nro',
      'password' => 'Contraseña',

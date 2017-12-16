@@ -15,8 +15,7 @@
         <div class="box">
             <div class="box-body">
                 
-                <div class="row">
-                    
+                <div class="row">                    
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label>@lang('labels.name')</label>
@@ -31,9 +30,7 @@
                             {!! $errors->first('location', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                     </div>
-
-                </div>
-                
+                </div>  
 
             </div>
             <div class="box-footer">
@@ -43,6 +40,7 @@
                 </div>
             </div>
         </div>
+        {!! Form::hidden('owner_id', $business->owner_id, array('placeholder' => Lang::get('labels.owner_id'), 'class' => 'form-control  border-input')) !!}
         {!! Form::close() !!}
     </section>
 @endsection

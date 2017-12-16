@@ -25,7 +25,7 @@
                         @foreach ($products as $key => $producto)
                             <tr>
                                 <td>{{ $producto->name }}</td>
-                                <td>{{ $producto->$products->category_id }}</td>
+                                <td>{{ $categories[$producto->category_id] }}</td>
                                 <td>{{ $producto->price }}</td>
                             <td>
                                     @if (Entrust::can('product-edit'))
