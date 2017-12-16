@@ -36,9 +36,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '419044218453973',
-        'client_secret' => '99567b18ae90709c9daa21df837505f8',
-        'redirect' => 'http://localhost:90/elgauchito/public/callback/facebook',
+        'client_id' => '254239395106791',
+        'client_secret' => '05e0689809e34eab82559ca95d1e97ae',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
     ],
    /* 'google' => [
         'client_id' => '907655216004474',
