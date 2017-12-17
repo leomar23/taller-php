@@ -178,10 +178,31 @@ class BusinessController extends Controller
      */
     public function edit($id)
     {
-
         $business = $this->repository->find($id);
+        $products = Product::get();        
+        $prods = DB::table('business_products')->where('business_id', '=', $business->id)->get()->toArray(); 
+        // arreglo con los productos vendidos por el comercio
+        $prod_vendidos = array();
+        $prices = array();
 
-        return view('business.edit', compact('business'));
+        foreach ($prods as $key => $value) {
+            array_push($prod_vendidos, $value->product_id);
+        }
+
+        foreach ($products as $key => $value2) {
+            //dd($value2->product_id, (int)$value2->price);
+            if (!is_null((int)$value2->price)) {
+                array_push($prices, (int)$value2->price);
+            } else {
+                array_push($prices, 0);
+            }
+        }
+
+        //dd($prices);
+
+        //dd($prod_vendidos);
+
+        return view('business.edit', compact('business', 'products', 'prod_vendidos', 'prices'));
     }
 
 
@@ -196,7 +217,7 @@ class BusinessController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:businesses,name',
+            'name' => 'required',
             'owner_id' => 'required',
             'location' => 'required'
         ]);
@@ -208,6 +229,22 @@ class BusinessController extends Controller
         $business->owner_id = $request->input('owner_id');
         $business->location = $request->input('location');
         $business->save();
+
+        DB::table('business_products')->where('business_products.business_id', $id)
+            ->delete();
+
+        foreach ($request->input('products') as $key => $value) {
+
+            if ( !is_null($request->input('price'.$value)) and ($request->input('price'.$value) != 0)) {
+
+                DB::table('business_products')->insert([
+                ['business_id' => $business->id, 'product_id' => (int)$value, 'price' => $request->input('price'.$value)] ]);
+            } else {
+
+                DB::table('business_products')->insert([
+                ['business_id' => $business->id, 'product_id' => (int)$value, 'price' => 0] ]);
+            }
+        }
 
         $notification = array(             
             'message' => ('Comercio actualizado satisfactoriamente'),             

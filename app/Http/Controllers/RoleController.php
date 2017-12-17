@@ -124,7 +124,7 @@ class RoleController extends Controller
         $role->description = $request->input('description');
         $role->save();
 
-        DB::table("permission_role")->where("permission_role.role_id",$id)
+        DB::table('permission_role')->where('permission_role.role_id', $id)
             ->delete();
 
         foreach ($request->input('permission') as $key => $value) {
