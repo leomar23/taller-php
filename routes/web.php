@@ -22,7 +22,7 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
 Route::group(['middleware' => ['auth']], function() {
     
-    Route::get('admin',['as'=>'admin.index','uses'=>'AdminController@index','middleware' => ['permission:admin-index']]);
+    Route::get('admin',['as'=>'admin.index','uses'=>'AdminController@index','middleware' => ['permission:admin-index|despachador-index|gerente-index']]);
 
     Route::resource('users','UserController');
     

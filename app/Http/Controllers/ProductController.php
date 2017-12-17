@@ -18,6 +18,7 @@ use Taller\Entities\Category;
 use Illuminate\Support\Facades\Auth;
 use Taller\Entities\StatusProduct;
 use Lang;
+use DB;
 
 //use Taller\Product;
 //use Illuminate\Http\Request;
@@ -40,11 +41,20 @@ class ProductController extends Controller
             $this->validator  = $validator;
         }
 
+    public function getUserRole($userId)
+    {
+        $aux = DB::table('role_user')->select('role_id')->where('user_id', '=', $userId)->get()->toArray();
+        return            
+            $aux[0]->role_id;
+    }
+
     public function index(Request $request)
     {
         $products = $this->repository->paginate(5);
         $categories = Category::pluck('name', 'id')->toArray();
-        return view('product.index', compact('products', 'categories'))
+        $rol = $this->getUserRole(Auth::user()->id);
+
+        return view('product.index', compact('products', 'categories', 'rol'))
                ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -56,8 +66,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id')->toArray();
-
-        return view('product.create',compact('categories'));
+        //$rol = $this->getUserRole(Auth::user()->id);
+        return view('product.create',compact('categories', 'rol'));
     }
 
     public function getTypeProduct(Request $request, $id)

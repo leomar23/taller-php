@@ -43,8 +43,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Inicio</a></li>
-                    @if (Entrust::can('admin-index'))
-                    <li><a href="{{ url('/admin') }}">Administrador</a></li>
+                    
+                    @if (Entrust::can('despachador-index')) <li><a href="{{ url('/admin') }}"> Ordenes </a></li> 
+                    
+                    @elseif(Entrust::can('admin-index')) <li><a href="{{ url('/admin') }}"> Administrador </a></li>
+
+                    @elseif(Entrust::can('gerente-index')) <li><a href="{{ url('/admin') }}"> Comercio </a></li>
+
                     @endif
                 </ul>
 

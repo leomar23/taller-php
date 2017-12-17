@@ -250,7 +250,16 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'Delete Orders Statuses',
                 'description' => 'Delete Orders Statuses'
             ],
-
+            [
+                'name' => 'despachador-index',
+                'display_name' => 'Permiso de Despachador',
+                'description' => 'Accede a menú de Despachador'
+            ],
+            [
+                'name' => 'gerente-index',
+                'display_name' => 'Permiso de Gerente',
+                'description' => 'Accede a menú de Gerente'
+            ],
 
 
 
