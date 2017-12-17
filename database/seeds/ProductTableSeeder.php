@@ -20,7 +20,7 @@ class ProductTableSeeder extends Seeder
                 'description' => 'aaa',
                 'bar_code' => '123',
                 'image' => 'imagen1',
-                'price' => 25,
+                //'price' => 25,
             ],
             [
                 'category_id' => 2,
@@ -29,7 +29,7 @@ class ProductTableSeeder extends Seeder
                 'description' => 'rrr',
                 'bar_code' => '432',
                 'image' => 'imagen2',
-                'price' => 800,
+                //'price' => 800,
             ],
             [
                 'category_id' => 1,
@@ -38,7 +38,7 @@ class ProductTableSeeder extends Seeder
                 'description' => 'bbb',
                 'bar_code' => '678',
                 'image' => 'imagen3',
-                'price' => 30,
+                //'price' => 30,
             ],
             [
                 'category_id' => 1,
@@ -47,7 +47,7 @@ class ProductTableSeeder extends Seeder
                 'description' => 'ccc',
                 'bar_code' => '888',
                 'image' => 'imagen4',
-                'price' => 45,
+                //'price' => 45,
             ]
         ];
 

@@ -14,6 +14,7 @@ use Taller\Validators\OrderValidator;
 use Taller\Entities\Order;
 use Taller\User;
 use Lang;
+use DB;
 
 
 
@@ -74,9 +75,17 @@ class OrdersController extends Controller
         ]);
 
         $order = new Order();
+
+        //$status = OrderStatus::find($request->input('status_id'));
+
+        $order->number = 1;     
         $order->user_id = $request->input('user_id');
         $order->shipping_place = $request->input('shipping_place');
         $order->save();
+
+        DB::table('order_status')->insert($order, $request->input('status_id'));
+
+        //$order->attachRole($status);
 
         return redirect()->route('orders.index')
             ->with('success','Orden editada correctamente');
@@ -118,6 +127,7 @@ class OrdersController extends Controller
 
 
         $order = new Order();
+        $order->number = $request->input('number');;
         $order->user_id = $request->input('user_id');
         $order->shipping_place = $request->input('shipping_place');
         $order->save();

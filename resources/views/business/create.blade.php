@@ -16,30 +16,63 @@
             <div class="box-body">
                 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-12">
-                        <div class="form-group {{ $errors->has('owner_id') ? ' has-error' : '' }}">
-                            <label>Propietario - </label>
-                            {!! Form::select('owner_id', $users, 1 ) !!} <!-- id de User seleccionado por defecto = 1 -->
-                            {!! $errors->first('owner_id', '<span class="help-block text-danger">:message</span>') !!}
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="form-group {{ $errors->has('owner_id') ? ' has-error' : '' }}">
+                                <label>Propietario - </label>
+                                {!! Form::select('owner_id', $users, 1 ) !!} <!-- id de User seleccionado por defecto = 1 -->
+                                {!! $errors->first('owner_id', '<span class="help-block text-danger">:message</span>') !!}
+                            </div>
+                        </div>                    
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label>@lang('labels.name')</label>
+                                {!! Form::text('name', null, array('placeholder' => Lang::get('labels.name'),'class' => 'form-control  border-input')) !!}
+                                {!! $errors->first('name', '<span class="help-block text-danger">:message</span>') !!}
+                            </div>
                         </div>
-                    </div>                    
-                    <div class="col-xs-12 col-sm-6 col-md-12">
-                        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label>@lang('labels.name')</label>
-                            {!! Form::text('name', null, array('placeholder' => Lang::get('labels.name'),'class' => 'form-control  border-input')) !!}
-                            {!! $errors->first('name', '<span class="help-block text-danger">:message</span>') !!}
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
+                                <label>@lang('labels.location')</label>
+                                {!! Form::textarea('location', null, array('placeholder' => Lang::get('labels.location'),'class' => 'form-control border-input')) !!}
+                                {!! $errors->first('location', '<span class="help-block text-danger">:message</span>') !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-12">
-                        <div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
-                            <label>@lang('labels.location')</label>
-                            {!! Form::textarea('location', null, array('placeholder' => Lang::get('labels.location'),'class' => 'form-control border-input')) !!}
-                            {!! $errors->first('location', '<span class="help-block text-danger">:message</span>') !!}
-                        </div>
-                    </div>
+                    </div>                   
 
-                </div>
-                
+                    <div class="col-xs-12 col-sm-6 col-md-6" > <!-- mitad derecha -->
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-12" >
+                            <div class="col-xs-12 col-sm-6 col-md-6" >
+                                <label>Productos que comercializa</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6" >
+                                <label>Precio</label>
+                            </div>
+                        </div>
+                        
+                        @foreach($products as $value)
+
+                            <div class="col-xs-12 col-sm-6 col-md-6" >                            
+                                <div class="form-group"> 
+                                        <div class="checkbox checkbox-primary">
+                                            {{ Form::checkbox('products[]', $value->id, false, array('id' => 'checkbox')) }}
+                                            <label> {{ $value->name }}</label>
+                                        </div>                                    
+                                </div>                            
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6" >                            
+                                <div class="form-group">
+                                        {{ Form::text('price'.$value->id, null, array('placeholder' => Lang::get('labels.price'),'class' => 'form-control  border-input')) }}
+                                        {!! $errors->first('location', '<span class="help-block text-danger">:message</span>') !!}
+                                </div> 
+                            </div>
+
+                        @endforeach
+                    </div> <!-- termina mitad derecha -->
+
+                </div>                
 
             </div>
             <div class="box-footer">

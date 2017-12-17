@@ -21,7 +21,6 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->text('bar_code');
             $table->text('image')->nullable();
-            $table->float('price',14,5);
             $table->timestamps();
             //$table->integer('user_id')->unsigned();
             //$table->integer('type_product_id')->unsigned();

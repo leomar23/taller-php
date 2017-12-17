@@ -28,4 +28,9 @@ class Order extends Model implements Transformable
         return $this->hasOne(OrderDetail::class);
     }
 
+    public function OrderStatus()
+    {
+        return $this->belongsTo(OrderStatus::class);
+    }
+
 }

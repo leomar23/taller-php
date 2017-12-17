@@ -37,9 +37,9 @@ class UserTableSeeder extends Seeder
         }
 
         DB::table('users')->insert([
-            'name' => 'TallerPHP',
+            'name' => 'AdminPHP',
             'last_name' => 'Administrador',
-            'phone' => '00000000',
+            'phone' => '0800111',
             'gender' => 'Male',
             'birth_date' => new DateTime,
             'email' => 'tallerphp@gmail.com',
@@ -48,35 +48,35 @@ class UserTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'John',
-            'last_name' => 'Doe',
-            'phone' => '00000000',
+            'name' => 'Johnie',
+            'last_name' => 'Bravo',
+            'phone' => '02185446',
             'gender' => 'Male',
             'birth_date' => new DateTime,
-            'email' => 'johndoe@gmail.com',
-            'password' => bcrypt('jdoe2017'),
+            'email' => 'ger@gmail.com',
+            'password' => bcrypt('321'),
             'status_id' => 1,
         ]);
 
         DB::table('users')->insert([
             'name' => 'Jane',
-            'last_name' => 'Doe',
-            'phone' => '00000000',
+            'last_name' => 'Watson',
+            'phone' => '02415487',
             'gender' => 'Female',
             'birth_date' => new DateTime,
-            'email' => 'janedoe@gmail.com',
-            'password' => bcrypt('jdoe2017'),
+            'email' => 'des@gmail.com',
+            'password' => bcrypt('321'),
             'status_id' => 1,
         ]);
 
         DB::table('users')->insert([
-            'name' => 'John',
+            'name' => 'Cli-enta',
             'last_name' => 'Q. Public',
-            'phone' => '00000000',
+            'phone' => '08001711',
             'gender' => 'Female',
             'birth_date' => new DateTime,
-            'email' => 'johnpublic@gmail.com',
-            'password' => bcrypt('jpublic2017'),
+            'email' => 'cli@gmail.com',
+            'password' => bcrypt('321'),
             'status_id' => 1,
         ]);
 
@@ -84,15 +84,15 @@ class UserTableSeeder extends Seeder
         $role = Role::query()->where('name', 'admin')->first();
         $user->attachRole($role);
 
-        $user2 = User::query()->where('email', 'johndoe@gmail.com')->first();
+        $user2 = User::query()->where('email', 'ger@gmail.com')->first();
         $role2 = Role::query()->where('name', 'gerente')->first();
         $user2->attachRole($role2);
 
-        $user3 = User::query()->where('email', 'janedoe@gmail.com')->first();
+        $user3 = User::query()->where('email', 'des@gmail.com')->first();
         $role3 = Role::query()->where('name', 'despachador')->first();
         $user3->attachRole($role3);
 
-        $user4 = User::query()->where('email', 'johnpublic@gmail.com')->first();
+        $user4 = User::query()->where('email', 'cli@gmail.com')->first();
         $role4 = Role::query()->where('name', 'cliente')->first();
         $user4->attachRole($role4);
     }

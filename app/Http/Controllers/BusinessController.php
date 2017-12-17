@@ -12,6 +12,7 @@ use Taller\Http\Requests\BusinessUpdateRequest;
 use Taller\Repositories\BusinessRepository;
 use Taller\Validators\BusinessValidator;
 use Taller\Entities\Business;
+use Taller\Entities\Product;
 use Taller\User;
 use DB;
 
@@ -65,10 +66,11 @@ class BusinessController extends Controller
         //$users = User::get(); // Llegan correctamente todos los Usuarios
 
         $users = User::pluck('name', 'id')->toArray();
+        $products = Product::get();
 
         //dd($users); // toArray() porque sino viaja como Collection y no anda el select (Combo)
 
-        return view('business.create', compact('users'));
+        return view('business.create', compact('users', 'products'));
     }
 
     /**
@@ -80,8 +82,10 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->input('precio3'));
+
         $this->validate($request, [
-            'name' => 'required|unique:businesses,name',
+            'name' => 'required',
             'owner_id' => 'required',            
             'location' => 'required'
         ]);
@@ -91,6 +95,19 @@ class BusinessController extends Controller
         $business->owner_id = $request->input('owner_id');
         $business->location = $request->input('location');
         $business->save();
+
+        foreach ($request->input('products') as $key => $value) {
+
+            if ( !is_null($request->input('price'.$value)) and ($request->input('price'.$value) != 0)) {
+
+                DB::table('business_products')->insert([
+                ['business_id' => $business->id, 'product_id' => (int)$value, 'price' => $request->input('price'.$value)] ]);
+            } else {
+
+                DB::table('business_products')->insert([
+                ['business_id' => $business->id, 'product_id' => (int)$value, 'price' => 0] ]);
+            }
+        }
 
         $notification = array(             
             'message' => ('Comercio creado satisfactoriamente'),             

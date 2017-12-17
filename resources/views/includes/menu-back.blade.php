@@ -7,7 +7,7 @@
     @endif
     <a href="{{ url('admin') }}"><i class="fa fa-pie-chart "></i><span>@lang('menu.back_dashboard')</span></a></li>
 
-     @if (Entrust::can('user-list'))
+    @if (Entrust::can('user-list'))
         @if(Route::is('users.index'))
              <li class="active">
         @else
@@ -15,7 +15,6 @@
         @endif
         <a href="{{ route('users.index') }}"><i class="fa fa-users"></i><span>@lang('menu.back_users')</span></a></li>
      @endif
-
     @if (Entrust::can('role-list'))
         @if(Route::is('roles.index'))
             <li class="active">

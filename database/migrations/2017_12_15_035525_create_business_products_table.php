@@ -17,8 +17,9 @@ class CreateBusinessProductsTable extends Migration
             
             $table->integer('business_id')->unsigned()->nullable();
             $table->integer('product_id')->unsigned()->nullable();
-            $table->integer('stock')->default(0);            
-
+            $table->integer('stock')->default(0);
+            $table->float('price',12,2);
+            
             $table->foreign('business_id')->references('id')
                 ->on('businesses')->onDelete('cascade');
             $table->foreign('product_id')->references('id')

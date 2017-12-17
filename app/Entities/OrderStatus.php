@@ -5,27 +5,20 @@ namespace Taller\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Taller\Entities\Product;
 
-class Business extends Model implements Transformable
+
+class OrderStatus extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = 
-    [
+    protected $fillable = [
+    	'id',
     	'name',
-    	'owner_id',
-    	'location'
     ];
 
-    public function User()
+    /*public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function product()
-    {
-        return $this->hasMany(Product::class);
-    }
+    }*/
 
 }
