@@ -15,17 +15,17 @@ class BusinessTableSeeder extends Seeder
         $businesses = [
             [
                 'name' => 'Tata',
-                'owner_id' => '1',
+                'owner_id' => '2',
                 'location' => 'location_text'
             ],
             [
                 'name' => 'Disco',
-                'owner_id' => '1',
+                'owner_id' => '2',
                 'location' => 'location_text 2'
             ],
             [
                 'name' => 'Tienda Inglesa',
-                'owner_id' => '1',
+                'owner_id' => '2',
                 'location' => 'location_text 3'
             ]
         ];

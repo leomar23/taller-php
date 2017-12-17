@@ -30,7 +30,19 @@ class BusinessProductTableSeeder extends Seeder
                 'product_id' => '3',
                 'stock' => 300,
                 'price' => 0,                
-            ]
+            ],
+            [
+                'business_id' => '2',
+                'product_id' => '2',
+                'stock' => 135,
+                'price' => 0,                
+            ],
+            [
+                'business_id' => '2',
+                'product_id' => '3',
+                'stock' => 180,
+                'price' => 0,                
+            ],
         ];
 
         foreach ($bus_prods as $key => $value) {

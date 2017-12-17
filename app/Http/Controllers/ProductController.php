@@ -48,13 +48,41 @@ class ProductController extends Controller
             $aux[0]->role_id;
     }
 
+    public function getBusIdByUser($userId)
+    {   
+        return $aux = DB::table('businesses')->select('id')->where('owner_id', '=', $userId)->get()->toArray();        
+    }
+
+    public function getProdByOwner($ownerId)
+    {
+        $buses = $this->getBusIdByUser($ownerId);
+
+        $aux2 = array();
+
+        foreach ($buses as $key => $bus) {
+            $arregloBus_Prod = DB::table('business_products')->where('business_id', '=', $bus->id)->get()->toArray();
+            
+            foreach ($arregloBus_Prod as $key => $value) {
+                array_push($aux2, $value);
+            }
+
+            //array_push($aux2, DB::table('business_products')->where('business_id', '=', $bus->id)->get()->toArray());
+        }
+        return            
+            $aux2;
+    }
+
     public function index(Request $request)
     {
         $products = $this->repository->paginate(5);
         $categories = Category::pluck('name', 'id')->toArray();
         $rol = $this->getUserRole(Auth::user()->id);
 
-        return view('product.index', compact('products', 'categories', 'rol'))
+        $arrayBus_Prod = ($this->getProdByOwner(Auth::user()->id));
+
+        // EN LA VISTA RECIBE PAGINADO, DESDE ACÁ TENDRÍA QUE SALIR MASTICADO
+
+        return view('product.index', compact('products', 'categories', 'rol', 'arrayBus_Prod'))
                ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
