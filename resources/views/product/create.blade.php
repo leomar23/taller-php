@@ -11,7 +11,7 @@
 
     </section>
     <section class="content container-fluid">
-        {!! Form::open(array('route' => 'product.store','method'=>'POST','id'=>'product-form')) !!}
+        {!! Form::open(array('route' => 'product.store','method'=>'POST','id'=>'product-form', 'enctype'=>'multipart/form-data')) !!}
         <div class="box">
             <div class="box-body">                
                 <div class="row">
@@ -43,19 +43,16 @@
                             {!! $errors->first('bar_code', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-12">
-                        <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
-                            <label>@lang('labels.image')</label>
-                            {!! Form::text('image', null, array('placeholder' => Lang::get('labels.image'),'class' => 'form-control border-input')) !!}
-                            {!! $errors->first('image', '<span class="help-block text-danger">:message</span>') !!}
-                        </div>
-                    </div>
+                    
                     <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
                             <label>@lang('labels.price')</label>
                             {!! Form::number('price', null, array('placeholder' => Lang::get('labels.price'),'class' => 'form-control border-input')) !!}
                             {!! $errors->first('price', '<span class="help-block text-danger">:message</span>') !!}
                         </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-12">
+                        <input type="file" name='imageSelector'>
                     </div>
                 </div>
             </div>
