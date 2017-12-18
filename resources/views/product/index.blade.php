@@ -20,9 +20,7 @@
                         
                         <tr>
                             <th>@lang('labels.name')</th>
-                            <th>@lang('labels.category')</th>
-                            
-                            <th>@lang('labels.image')</th>
+                            <th>@lang('labels.category')</th>                            
 
                             <th width="280px">Acciones</th>
                         </tr>
@@ -33,9 +31,7 @@
                             <tr>
                                 <td>{{ $producto->name }}</td>
                                 <td>{{ $categories[$producto->category_id] }}</td>                                
-                                <td>
-                                    <img src="{{ Storage::get('ImagesProducts/' . array_get($idsProdConImage[$posicion], $producto->id)) }}" alt="" class="img-responsive">
-                                </td>
+                                
                                 <td>
                                     @if (Entrust::can('product-edit'))
                                         <a class="btn btn-default btn-st" href="{{ route('product.edit',$producto->id) }}"><i class="fa fa-pencil"></i>@lang('buttons.edit')</a>

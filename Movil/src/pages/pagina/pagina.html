@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Productos</ion-title>
+      <ion-icon ios="ios-cart" md="md-cart" item-right></ion-icon>
+    </ion-navbar>
+  </ion-header>
+
+<!--ion-header>
+    <ion-navbar color="royal">
+      <button menuToggle ion-button icon-only>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Productos</ion-title>
+      <ion-icon ios="ios-menu" md="md-menu" item-left></ion-icon>
+      <ion-icon ios="ios-cart" md="md-cart" item-rigth></ion-icon>
+    </ion-navbar>
+  </ion-header-->
+  
+  <ion-content>
+    <ion-searchbar (ionInput)="getProd($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of productos">
+        <!--ion-item>
+          <h2>{{producto.name}}</h2>
+          <p>{{producto.price}}</p>
+        </ion-item-->
+            <ion-thumbnail item-start>
+              <img src={{producto.image}}>
+            </ion-thumbnail>
+            <h2>{{producto.name}}</h2>
+            <p>{{producto.price}}</p>
+            <button ion-button clear item-end (click)="ViewProd()">View</button>
+            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </ion-item-sliding>
+    </ion-list>
+    <!--p *ngIf="!carro.length" padding text-center>
+      Dein Warenkorb ist nocht leer!
+    </p-->
+    <!--ion-list>
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src={{producto.image}}>
+          </ion-thumbnail>
+          <h2>{{producto.name}}</h2>
+          <p>{{producto.price}}</p>
+          <button ion-button clear item-end (click)="ViewProd()">View</button>
+          <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+        </ion-item>
+      </ion-list-->
+  </ion-content>

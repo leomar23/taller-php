@@ -1,0 +1,74 @@
+<!--ion-header>
+    <ion-navbar>
+      <ion-title>BuyCar</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card center>
+    <ion-card-header>
+      Datos del usuario
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Usuario:</ion-label>
+          <ion-input type="text"[(ngModel)]="user"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Password:</ion-label>
+          <ion-input type="password"[(ngModel)]="pass"></ion-input>
+        </ion-item>
+      </ion-list>
+      <div padding>
+        <p>
+          <button ion-button block (click)="SignUp()" round>Ingresar</button>
+        </p>
+        <p>
+          <button ion-button color="secondary" block round>Registrarse</button>
+        </p>
+      </div>
+      <div>
+        <ion-label >Entrar como invitado</ion-label>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content-->
+
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="loginUser()">
+    <ion-list>
+      <ion-item text-center>
+        <ion-img width="192" height="192" src="assets/logo192.png" ></ion-img>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-left></ion-icon>
+        <ion-label stacked>Email:</ion-label>
+        <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="key" item-left></ion-icon>
+        <ion-label stacked>Password:</ion-label>
+        <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+        <!--[disabled]="!myForm.valid"-->
+      <button ion-button block type="submit" round>Ingresar</button>
+      <button ion-button block color="secondary"  round (click)="goToSignup()">Registrarse</button>
+      <button ion-button block (click)="loginFacebook()">Iniciar con facebook</button>
+      <ion-item *ngIf="showUser">
+        <ion-avatar item-left>
+          <img [src]="user.picture.data.url" alt="">
+        </ion-avatar>
+        <h2>{{user.name}}</h2>
+        <p>{{user.email}}</p>
+      </ion-item>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Producto</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content class="cards-bg">
+    <ion-card>
+      <img src="img/descarga.jpg"/>
+  
+      <ion-card-content>
+        <ion-card-title>Producto1<!--{{producto.nombre}}--></ion-card-title>
+        <p>Descripcion Producto1<!--{{producto.descripcion}}--></p>
+        <p>Precio $: <!--{{producto.precio}}--></p>
+      </ion-card-content>
+  
+      <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="danger" icon-start>
+            <ion-icon name='star'></ion-icon>
+            Favorite
+          </button>
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button  small icon-start>
+            <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+            Comprar
+          </button>
+        </ion-col>
+        
+      </ion-row>
+    </ion-card>
+  
+  </ion-content>
