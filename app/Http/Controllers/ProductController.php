@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Taller\Entities\StatusProduct;
 use Lang;
 use DB;
+use Storage;
 
 //use Taller\Product;
 //use Illuminate\Http\Request;
@@ -41,6 +42,14 @@ class ProductController extends Controller
             $this->validator  = $validator;
         }
 
+    public function getProducts()
+    {
+        $products = $this->repository->all()->toJson();
+
+        return $products;
+    }
+
+
     public function getUserRole($userId)
     {
         $aux = DB::table('role_user')->select('role_id')->where('user_id', '=', $userId)->get()->toArray();
@@ -50,27 +59,58 @@ class ProductController extends Controller
 
     public function getBusIdByUser($userId)
     {   
-        return $aux = DB::table('businesses')->select('id')->where('owner_id', '=', $userId)->get()->toArray();        
+        $aux = DB::table('businesses')->select('id')->where('owner_id', '=', $userId)->get();   
+        
+        return $aux; // HASTA ACA VIENE BIEN, DEVUELVE LOS ID DE BUSINESS DEL LOGUEADO
     }
 
     public function getProdByOwner($ownerId)
     {
-        $buses = $this->getBusIdByUser($ownerId);
 
-        $aux2 = array();
+        $busesIds = $this->getBusIdByUser($ownerId); // id de las empresas del logueado
 
-        foreach ($buses as $key => $bus) {
-            $arregloBus_Prod = DB::table('business_products')->where('business_id', '=', $bus->id)->get()->toArray();
+        $aux2 = collect(); // AQUI SE CARGAN LOS ID DE PRODUCTOS QUE PUEDE VER EL LOGUEADO
+
+        foreach ($busesIds as $key => $bus) {
             
-            foreach ($arregloBus_Prod as $key => $value) {
-                array_push($aux2, $value);
-            }
+            $arregloBus_Prod = DB::table('business_products')->where('business_id', '=', $bus->id)->get();
 
-            //array_push($aux2, DB::table('business_products')->where('business_id', '=', $bus->id)->get()->toArray());
+            foreach ($arregloBus_Prod as $key => $value) {
+                $aux2->push($value->product_id);
+            }
         }
+
+        //dd($arregloBus_Prod->all(), $aux2->all()); // EN aux2 VA LA LISTA DE PRODUCTOS QUE PUEDE VER
+
         return            
             $aux2;
     }
+
+    public function getImageByFilename($filename)
+    {
+        $img = Storage::get('ImagesProducts/' . $filename);
+        return $img;
+    }
+
+    public function getImageByProdId($id)
+    {
+        /*Product::select('image')->where('id', '=', $id);*/
+
+        //dd(Product::select('image')->where('id', '=', $id)->get());
+
+        $prod = $this->repository->find($id);
+
+        return $prod->image;
+
+        //$img = Storage::get('ImagesProducts/' . $filename);
+        //return $img;
+    }
+
+
+
+    ////// **************** ///////
+
+
 
     public function index(Request $request)
     {
@@ -78,11 +118,26 @@ class ProductController extends Controller
         $categories = Category::pluck('name', 'id')->toArray();
         $rol = $this->getUserRole(Auth::user()->id);
 
-        $arrayBus_Prod = ($this->getProdByOwner(Auth::user()->id));
+        $productosQuePuedeVer = ($this->getProdByOwner(Auth::user()->id))->toArray(); // arreglo de ids de productos que puede ver
+        $idsProdConImage = array();
+
+        foreach ($productosQuePuedeVer as $key => $idProdVisible) {
+            $imageProd = $this->getImageByProdId($idProdVisible);
+            array_push($idsProdConImage, [$idProdVisible, $imageProd]);
+        }
+
+        //dd($productosQuePuedeVer);
+
+        //dd($idsProdConImage); // duplas [idProductoQuePuedeVer, nombreImagen]
+
+        /*$prodsAngela = $this->getProducts();
+        dd($prodsAngela);
+*/
+        //$imageProd = $this->getImageByFilename();
 
         // EN LA VISTA RECIBE PAGINADO, DESDE ACÁ TENDRÍA QUE SALIR MASTICADO
 
-        return view('product.index', compact('products', 'categories', 'rol', 'arrayBus_Prod'))
+        return view('product.index', compact('products', 'categories', 'rol', 'productosQuePuedeVer', 'idsProdConImage'))
                ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -123,10 +178,15 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'bar_code' => 'required',
-            'image' => 'required',
+            //'image' => 'required',
             'price' => 'required'
 
         ]);
+
+        $image = $request->file('imageSelector');
+        $filename = $image->getClientOriginalName();
+
+        Storage::put('ImagesProducts/' . $filename, file_get_contents($request->file('imageSelector')->getPathName()));
 
         $product = new Product();
         $product->category_id = $request->input('category_id');
@@ -134,8 +194,8 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->bar_code = $request->input('bar_code');
-        $product->image = $request->input('image');
-        $product->price = $request->input('price');
+        $product->image = $filename;
+        
         $product->save();
 
         /*
@@ -211,7 +271,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         //$product->bar_code = $request->input('bar_code');
         //$product->image = $request->input('image');
-        $product->price = $request->input('price');
+
         $product->save();
 
         $notification = array(             

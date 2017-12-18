@@ -12,22 +12,31 @@
         @endif
 </section>
 <section class="content container-fluid">
+    {!! $posicion = 0 !!}
         <div class="box">
             <div class="box-body">
                 <div class="table-responsive">
                     <table class="table">
+                        
                         <tr>
                             <th>@lang('labels.name')</th>
                             <th>@lang('labels.category')</th>
-                            <!-- <th>@lang('labels.price')</th> -->
+                            
+                            <th>@lang('labels.image')</th>
+
                             <th width="280px">Acciones</th>
                         </tr>
                         @foreach ($products as $key => $producto)
+
+                        @if (in_array($producto->id, $productosQuePuedeVer))
+
                             <tr>
                                 <td>{{ $producto->name }}</td>
-                                <td>{{ $categories[$producto->category_id] }}</td>
-                                <!-- <td>{{ $producto->price }}</td> -->
-                            <td>
+                                <td>{{ $categories[$producto->category_id] }}</td>                                
+                                <td>
+                                    <img src="{{ Storage::get('ImagesProducts/' . array_get($idsProdConImage[$posicion], $producto->id)) }}" alt="" class="img-responsive">
+                                </td>
+                                <td>
                                     @if (Entrust::can('product-edit'))
                                         <a class="btn btn-default btn-st" href="{{ route('product.edit',$producto->id) }}"><i class="fa fa-pencil"></i>@lang('buttons.edit')</a>
                                     @endif
@@ -37,7 +46,11 @@
                                         {!! Form::close() !!}
                                     @endif
                                 </td>
+                            {!! $posicion = $posicion + 1 !!}
                             </tr>
+
+                        @endif
+
                         @endforeach
                     </table>
                 </div>
