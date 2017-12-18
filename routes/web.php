@@ -15,6 +15,18 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
+//FRONT
+Route::get('index', 'HomeController@prod_index');
+
+Route::resource('carts', 'CartController');
+
+
+//Route::get('front/product_index',['as'=>'product_index','uses'=>'HomeController@prod_index']);
+
+Route::get('product/getProducts',['as'=>'product.getProducts','uses'=>'ProductController@getProducts']);
+
+
+
 Auth::routes();
 
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
@@ -34,6 +46,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('product/{id}/edit',['as'=>'product.edit','uses'=>'ProductController@edit','middleware' => ['permission:product-edit']]);
     Route::patch('product/{id}',['as'=>'product.update','uses'=>'ProductController@update','middleware' => ['permission:product-edit']]);
     Route::delete('product/{id}',['as'=>'product.destroy','uses'=>'ProductController@destroy','middleware' => ['permission:product-delete']]);
+
     
     //USER
     Route::get('users',['as'=>'users.index','uses'=>'UserController@index','middleware' => ['permission:user-list|user-create|user-edit|user-delete']]);

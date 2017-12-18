@@ -33,6 +33,7 @@ Este comando se encarga de descargar los plugins y componentes anotados en `comp
 - Crear la base de datos con el mismo nombre que se encuentra dentro del arvhivo `.env`
 de la opción `DB_DATABASE`
 - Configurar los datos de la conexión a la base de datos:  `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+- Crear en phpMyAdmin la base de datos: db_Taller
 
 ##### Migraciones
 #
@@ -71,3 +72,5 @@ Publish Configuration
 php artisan vendor:publish 
 ```
 
+Con respecto a la recuperación de la contrasña, se configuró mailtrap.io como correo para recibir el link.
+Las credenciales para acceder a dicha casilla son: ignacio.uru@gmail.com / pass: tallerphp2017
